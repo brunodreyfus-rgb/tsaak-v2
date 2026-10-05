@@ -158,8 +158,8 @@ const s={
  metrics:{display:'flex',gap:12,marginTop:40,flexWrap:'wrap'},
  metric:{padding:'14px 18px',border:'1px solid #ffffff18',borderRadius:18,background:'#ffffff09',display:'grid'},
 
- conceptFrame:{display:'block',width:'100%',height:'100%',minHeight:260,borderRadius:20,overflow:'hidden',border:'1px solid #ffffff1c',boxShadow:'0 20px 50px rgba(0,0,0,.4), 0 0 40px rgba(0,213,255,.10)',textDecoration:'none'},
- conceptImg:{display:'block',width:'100%',height:'100%',objectFit:'cover',objectPosition:'center'},
+ conceptFrame:{display:'flex',alignItems:'center',justifyContent:'center',width:'100%',height:'100%',minHeight:260,borderRadius:20,overflow:'hidden',border:'1px solid #ffffff1c',boxShadow:'0 20px 50px rgba(0,0,0,.4), 0 0 40px rgba(0,213,255,.10)',textDecoration:'none',background:'linear-gradient(135deg,#02030A,#080B18 45%,#02030A)'},
+ conceptImg:{display:'block',width:'100%',height:'100%',objectFit:'contain',objectPosition:'center'},
 
  section:{position:'relative',zIndex:1,padding:'50px clamp(18px,4vw,70px)',borderTop:'1px solid #ffffff0c'},
  sectionHead:{marginBottom:28,maxWidth:720},
