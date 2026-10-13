@@ -41,7 +41,7 @@ if (_sarah) {
 export const realTalents = [
   {
     id:'jeremie-mani', name:'Jérémie Mani', role:'CEO Webhelp Canada', country:'Canada',
-    photo:'/avatars/jeremie-mani.png', score:79, price:'Sur devis',
+    photo:'/avatars/jeremie-mani.png', score:85, price:'Sur devis',
     languages:['FR','EN'], tags:['Outsourcing','Entrepreneuriat à impact','Talent TSAAK'],
     linkedin:{headline:'CEO Webhelp Canada · co-fondateur Podcasthon.org', followers:'—', company:'Webhelp Canada'},
     media:[
@@ -55,7 +55,7 @@ export const realTalents = [
   },
   {
     id:'david-hammel', name:'David Hammel', role:'Fondateur & CEO, Tsinor Venture Studio', country:'France',
-    photo:'/avatars/david-hammel.png', score:75, price:'Sur devis',
+    photo:'/avatars/david-hammel.png', score:70, price:'Sur devis',
     languages:['FR','EN'], tags:['Venture Studio','IA pour le BTP','Talent TSAAK'],
     linkedin:{headline:'Fondateur & CEO, Tsinor Venture Studio', followers:'—', company:'Tsinor Venture Studio'},
     media:[
@@ -68,7 +68,7 @@ export const realTalents = [
   },
   {
     id:'bruno-dreyfus', name:'Bruno Dreyfus', role:'Co-CEO, TSAAK', country:'—',
-    photo:'/avatars/bruno-dreyfus.png', score:45, price:'—',
+    photo:'/avatars/bruno-dreyfus.png', score:28, price:'—',
     languages:['FR','EN'], tags:['Bijouterie','Innovation data','Talent TSAAK'],
     linkedin:{headline:'Tenengroup', followers:'—', company:'Tenengroup'},
     media:[],
@@ -77,7 +77,7 @@ export const realTalents = [
   },
   {
     id:'jonathan-allouche', name:'Jonathan Allouche', role:'Co-CEO, TSAAK', country:'Israël / France',
-    photo:'/avatars/jonathan-allouche.png', score:82, price:'Sur devis',
+    photo:'/avatars/jonathan-allouche.png', score:68, price:'Sur devis',
     languages:['FR','EN','HE'], tags:['Stand-up & production', 'Metaverse', 'Talent TSAAK'],
     linkedin:{headline:'CEO Writing Metavers · Fondateur, Comedy Club Academy', followers:'—', company:'Writing Metavers'},
     media:[

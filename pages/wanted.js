@@ -2,7 +2,9 @@ import { page, card, button, colors, Badge, Masthead, Stepper, useLocal } from '
 
 const STATUSES = ['Open','Proposals','Shortlist','Selected','Contract','Paid','Done'];
 
-const DEFAULT_WANTED = { title:'Joueur de l’équipe de France, champion du monde de football, pour interview exclusive', media:'LCI', budget:'8 000 €', deadline:'Aujourd’hui 21:00', brief:'Recherche un joueur champion du monde disponible pour une interview exclusive en plateau, réaction à chaud après la victoire.', status:'Open' };
+const COMPENSATION_TYPES = ['Payé', 'Défraiement', 'Dédommagement', 'Bénévole'];
+
+const DEFAULT_WANTED = { title:'Joueur de l’équipe de France, champion du monde de football, pour interview exclusive', media:'LCI', budget:'8 000 €', compensationType:'Payé', deadline:'Aujourd’hui 21:00', brief:'Recherche un joueur champion du monde disponible pour une interview exclusive en plateau, réaction à chaud après la victoire.', status:'Open' };
 
 export default function Wanted(){
   const [w,setW] = useLocal('tsaak:wanted', DEFAULT_WANTED);
@@ -26,6 +28,12 @@ export default function Wanted(){
           <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
             <input value={w.media} onChange={e=>set('media',e.target.value)} style={inp} placeholder='Média'/>
             <input value={w.budget} onChange={e=>set('budget',e.target.value)} style={inp} placeholder='Budget'/>
+          </div>
+          <div>
+            <label style={{fontSize:12,color:'#94a3b8',display:'block',marginBottom:5}}>Type de rémunération</label>
+            <select value={w.compensationType||'Payé'} onChange={e=>set('compensationType',e.target.value)} style={inp}>
+              {COMPENSATION_TYPES.map(c=><option key={c} value={c} style={{color:'#000'}}>{c}</option>)}
+            </select>
           </div>
           <input value={w.deadline} onChange={e=>set('deadline',e.target.value)} style={inp} placeholder='Deadline'/>
           <textarea value={w.brief} onChange={e=>set('brief',e.target.value)} style={{...inp,minHeight:100}} placeholder='Brief'/>

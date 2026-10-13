@@ -31,15 +31,15 @@ export default function Contract(){
 
   return <main style={page('organisation')}>
     <Masthead active='contrat'/>
-    <Badge c={colors.organisation}>BUSINESS CASE · CONTRAT & PAIEMENT</Badge>
+    <Badge c={colors.organisation}>BUSINESS CASE · ENGAGEMENT & PAIEMENT</Badge>
     <h1 style={{fontSize:50,maxWidth:920}}>Du brief signé au paiement, en un seul tunnel</h1>
-    <p style={{color:'#C9D4E4',fontSize:19,maxWidth:900}}>Template → variables → prévisualisation → signature électronique → paiement post-signature → prestation ajoutée automatiquement aux dashboards.</p>
+    <p style={{color:'#C9D4E4',fontSize:19,maxWidth:900}}>Pas de contrat juridique lourd : un engagement simple façon CGV (chacun sait ce qu'il doit) → signature électronique → paiement post-signature → prestation ajoutée automatiquement aux dashboards.</p>
 
-    <Stepper c={colors.organisation} active={ct.stage} steps={['Contrat','Signature','Paiement','Terminé']}/>
+    <Stepper c={colors.organisation} active={ct.stage} steps={['Engagement','Signature','Paiement','Terminé']}/>
 
     {ct.stage===0 && <div style={{display:'grid',gridTemplateColumns:'1.1fr .9fr',gap:22}}>
       <section style={card(colors.organisation)}>
-        <h2>Contract builder</h2>
+        <h2>Créer l'engagement (CGV simplifiée)</h2>
         <label style={{fontSize:13,color:'#94a3b8'}}>Template</label>
         <select value={ct.template} onChange={e=>set('template',e.target.value)} style={{...field(),marginTop:6,marginBottom:14}}>
           {TEMPLATES.map(t=><option key={t} value={t} style={{color:'#000'}}>{t}</option>)}
@@ -62,15 +62,12 @@ export default function Contract(){
       </section>
 
       <section style={card('rgba(255,255,255,.14)')}>
-        <h2>Prévisualisation du contrat</h2>
-        <p style={{color:'#94a3b8',fontSize:13}}>ID : PIVEO-C-{new Date().getFullYear()}-{String(ct.price).padStart(4,'0')}</p>
+        <h2>Aperçu de l'engagement</h2>
+        <p style={{color:'#94a3b8',fontSize:13}}>Réf : TSAAK-{new Date().getFullYear()}-{String(ct.price).padStart(4,'0')} · {ct.template}</p>
         <div style={{fontSize:14,color:'#C9D4E4',lineHeight:1.7,padding:16,borderRadius:14,background:'rgba(255,255,255,.04)'}}>
-          <p><b>{ct.template}</b></p>
-          <p>Entre <b>{ct.media}</b> (demandeur) et <b>{ct.talent}</b> (Talent), avec intermédiaire <b>{ct.intermediary}</b>.</p>
-          <p>Intervention le <b>{ct.date}</b> à <b>{ct.time}</b>, durée <b>{ct.duration}</b>, lieu : {ct.location}.</p>
-          <p>Livrables : {ct.deliverables.join(', ') || 'aucun sélectionné'}.</p>
-          <p>Clause de confidentialité : {ct.nda ? 'NDA applicable' : 'non applicable'}. Annulation : jusqu’à J-1 sans frais.</p>
-          <p>Montant prestation : <b>{euro(ct.price)}</b> + commission de service TSAAK ({Math.round(commissionRate*100)}%) : <b>{euro(commission)}</b>.</p>
+          <p><b>{ct.talent}</b> (le Talent) s'engage à intervenir le <b>{ct.date}</b> à <b>{ct.time}</b>, pendant <b>{ct.duration}</b>, lieu : {ct.location} ({ct.deliverables.join(', ') || 'aucun livrable sélectionné'}).</p>
+          <p><b>{ct.media}</b> (le Media) s'engage à régler <b>{euro(ct.price)}</b> pour cette intervention, plus la commission de service TSAAK ({Math.round(commissionRate*100)}%) : <b>{euro(commission)}</b> — soit <b>{euro(total)}</b> au total, payable à la signature. Intermédiaire associé : {ct.intermediary}.</p>
+          <p style={{color:'#94a3b8',fontSize:13}}>Confidentialité : {ct.nda ? 'clause NDA applicable' : 'pas de clause NDA'}. Annulation possible jusqu'à J-1 sans frais. Ceci vaut acceptation des CGV TSAAK — pas de contrat séparé à signer entre les parties.</p>
           <p style={{color:colors.core,fontWeight:800}}>Total dû à la signature : {euro(total)}</p>
         </div>
       </section>
@@ -78,10 +75,10 @@ export default function Contract(){
 
     {ct.stage===1 && <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:22}}>
       <section style={card(colors.organisation)}>
-        <h2>Résumé du contrat</h2>
-        <p style={{color:'#C9D4E4'}}>ID: PIVEO-C-{new Date().getFullYear()}-{String(ct.price).padStart(4,'0')} · Parties: {ct.media}, Talent {ct.talent}</p>
+        <h2>Résumé de l'engagement</h2>
+        <p style={{color:'#C9D4E4'}}>Réf: TSAAK-{new Date().getFullYear()}-{String(ct.price).padStart(4,'0')} · {ct.media} ↔ Talent {ct.talent}</p>
         <p style={{color:'#C9D4E4'}}>Montant: <b>{euro(ct.price)}</b> · {ct.date} à {ct.time} · {ct.duration}</p>
-        <p style={{color:'#94a3b8',fontSize:13}}>En signant, {ct.talent} accepte les termes ci-dessus, y compris le calendrier de paiement post-signature.</p>
+        <p style={{color:'#94a3b8',fontSize:13}}>En signant, {ct.talent} accepte cet engagement (CGV TSAAK), y compris le calendrier de paiement post-signature.</p>
       </section>
       <section style={card(colors.talent)}>
         <h2>Signature électronique — {ct.talent}</h2>
@@ -129,7 +126,7 @@ function PaymentStep({ct,setCt,total,commission,intermediaryFee}){
 
 function DoneStep({ct,total,commission,intermediaryFee,reset}){
   function downloadReceipt(){
-    const txt = `TSAAK — Facture\nContrat: PIVEO-C-${new Date().getFullYear()}-${String(ct.price).padStart(4,'0')}\nMédia: ${ct.media}\nTalent: ${ct.talent}\nDate prestation: ${ct.date} ${ct.time}\n\nPrestation: ${ct.price} EUR\nCommission service TSAAK: ${commission} EUR\nTotal payé: ${total} EUR\n\nSigné par: ${ct.signature}\nPayé le: ${new Date(ct.paidAt||Date.now()).toLocaleString('fr-FR')}\n`;
+    const txt = `TSAAK — Facture\nEngagement: TSAAK-${new Date().getFullYear()}-${String(ct.price).padStart(4,'0')}\nMédia: ${ct.media}\nTalent: ${ct.talent}\nDate prestation: ${ct.date} ${ct.time}\n\nPrestation: ${ct.price} EUR\nCommission service TSAAK: ${commission} EUR\nTotal payé: ${total} EUR\n\nSigné par: ${ct.signature}\nPayé le: ${new Date(ct.paidAt||Date.now()).toLocaleString('fr-FR')}\n`;
     const blob = new Blob([txt], {type:'text/plain'});
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href=url; a.download='tsaak-facture.txt'; a.click(); URL.revokeObjectURL(url);

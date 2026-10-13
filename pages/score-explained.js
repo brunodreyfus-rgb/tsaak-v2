@@ -3,10 +3,10 @@ import { page, card, button, colors, Badge, Progress, Masthead, CountUp, Slider,
 import { mediaProofs } from '../data/mediaProofs';
 
 const FACTORS = [
-  { k:'desirability', name:'Désirabilité du Talent', desc:'Demandes entrantes, rareté du sujet, tension marché, budget média.', weight:0.30, c:colors.talent },
-  { k:'fan', name:'Indice FanTSAak', desc:'Signaux communauté, recommandations, engagement sur contenus et suivis.', weight:0.20, c:colors.communaute },
-  { k:'media', name:'Passages média', desc:'TV, podcast, presse, tribunes, panels, séminaires et récence des preuves.', weight:0.30, c:colors.media },
-  { k:'performance', name:'Performance', desc:'Fiabilité, rapidité de réponse, qualité brief, ponctualité, satisfaction post-intervention.', weight:0.20, c:colors.organisation },
+  { k:'desirability', name:'Désirabilité du Talent', desc:'Demandes entrantes, rareté du sujet, tension marché, budget média.', weight:0.35, c:colors.talent },
+  { k:'fan', name:'Indice FanTSAak', desc:'Signaux communauté, recommandations, engagement sur contenus et suivis. Poids volontairement réduit au lancement — montée en puissance prévue en Phase 2.', weight:0.05, c:colors.communaute, phase2:true },
+  { k:'media', name:'Passages média', desc:'TV, podcast, presse, tribunes, panels, séminaires et récence des preuves.', weight:0.35, c:colors.media },
+  { k:'performance', name:'Performance', desc:'Fiabilité, rapidité de réponse, qualité brief, ponctualité, satisfaction post-intervention.', weight:0.25, c:colors.organisation },
 ];
 
 const HISTORY = [78,81,83,85,86,88,89,90,91,92];
@@ -26,13 +26,21 @@ export default function Score(){
 
     <Stepper c={colors.talent} active={stage} steps={STEPS} onStepClick={setStage} maxReached={STEPS.length-1}/>
 
+    <section style={{...card(colors.organisation),marginBottom:20,display:'grid',gridTemplateColumns:'auto 1fr',gap:18,alignItems:'start'}}>
+      <div style={{fontSize:30}}>⇄</div>
+      <div>
+        <h2 style={{margin:'0 0 8px',fontSize:19}}>Une confiance à double sens</h2>
+        <p style={{color:'#C9D4E4',margin:0,fontSize:14}}>Le Score TSAAK note le Talent — mais après chaque intervention, le Talent note à son tour le Média ou l'Organisation (brief clair, respect des délais, paiement, accueil). Comme sur toute plateforme de mise en relation, la qualité de l'intervention elle-même engage les deux parties : TSAAK fournit le score de confiance mutuel et la traçabilité, pas une garantie de résultat sur ce qui se dit ou se passe en plateau.</p>
+      </div>
+    </section>
+
     {stage===0 && <section style={{...card(colors.core),display:'grid',gridTemplateColumns:'220px 1fr',gap:24,alignItems:'center'}}>
       <div style={{fontSize:76,fontWeight:900,color:colors.core,textShadow:`0 0 34px ${colors.core}`}}><CountUp value={score} decimals={0}/></div>
       <div>
         <h2 style={{margin:'0 0 8px'}}>Score TSAAK live</h2>
         <p style={{color:'#C9D4E4',margin:0}}>score = Σ (valeur du facteur × poids) — mis à jour selon les preuves média, demandes, réponses, feedbacks et signaux FanTSAak.</p>
         <div style={{display:'grid',gap:8,marginTop:14}}>
-          {FACTORS.map(f=><div key={f.k} style={{display:'flex',justifyContent:'space-between',fontSize:13,color:'#C9D4E4'}}><span>{f.name} · poids {Math.round(f.weight*100)}%</span><b style={{color:f.c}}>{values[f.k]}</b></div>)}
+          {FACTORS.map(f=><div key={f.k} style={{display:'flex',justifyContent:'space-between',fontSize:13,color:'#C9D4E4'}}><span>{f.name} · poids {Math.round(f.weight*100)}%{f.phase2 && <span style={{color:colors.communaute,fontWeight:700}}> · Phase 2</span>}</span><b style={{color:f.c}}>{values[f.k]}</b></div>)}
         </div>
         <button onClick={()=>setStage(1)} style={{...button(colors.talent),border:'none',cursor:'pointer',marginTop:16}}>Ajuster les facteurs →</button>
       </div>
@@ -41,7 +49,7 @@ export default function Score(){
     {stage===1 && <>
       <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))',gap:20}}>
         {FACTORS.map(f=><section key={f.k} style={card(f.c)}>
-          <Badge c={f.c}>{f.name} · poids {Math.round(f.weight*100)}%</Badge>
+          <Badge c={f.c}>{f.name} · poids {Math.round(f.weight*100)}%{f.phase2 ? ' · Phase 2' : ''}</Badge>
           <Slider label='Valeur actuelle' value={values[f.k]} c={f.c} onChange={v=>setValues({...values,[f.k]:v})}/>
           <p style={{color:'#C9D4E4',fontSize:14}}>{f.desc}</p>
           <p style={{color:f.c,fontSize:13,fontWeight:800}}>Contribution au score : {(values[f.k]*f.weight).toFixed(1)} pts</p>

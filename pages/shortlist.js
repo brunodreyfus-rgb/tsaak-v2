@@ -6,6 +6,7 @@ export default function Shortlist(){
   const [threads,setThreads] = useLocal('tsaak:threads', []);
   const [subject,setSubject] = useState('Invitation plateau TV — IA & société');
   const [body,setBody] = useState('Bonjour, nous préparons une émission demain à 18h. Seriez-vous disponible pour intervenir ?');
+  const [compensationType,setCompensationType] = useState('Payé');
   const [sent,setSent] = useState(false);
 
   function remove(id){ setShortlist(shortlist.filter(x=>x.id!==id)); }
@@ -15,7 +16,7 @@ export default function Shortlist(){
     const next = [...threads];
     shortlist.forEach(t=>{
       const existing = next.find(th=>th.id===t.id);
-      const msg = { from:'media', text:`${subject}\n\n${body}`, ts:now };
+      const msg = { from:'media', text:`${subject}\n\n${body}\n\nType de rémunération : ${compensationType}`, ts:now };
       if(existing){ existing.messages.push(msg); existing.replied=false; }
       else next.push({ id:t.id, name:t.name, photo:t.photo, messages:[msg], replied:false });
     });
@@ -47,6 +48,12 @@ export default function Shortlist(){
         <p style={{color:'#94a3b8',fontSize:13}}>{shortlist.map(x=>x.name).join(' · ')}</p>
         <input value={subject} onChange={e=>setSubject(e.target.value)} style={{width:'100%',padding:14,borderRadius:12,background:'rgba(255,255,255,.06)',border:'1px solid rgba(255,255,255,.14)',color:'#fff',boxSizing:'border-box',marginBottom:10}}/>
         <textarea value={body} onChange={e=>setBody(e.target.value)} style={{width:'100%',minHeight:110,padding:14,borderRadius:12,background:'rgba(255,255,255,.06)',border:'1px solid rgba(255,255,255,.14)',color:'#fff',boxSizing:'border-box'}}/>
+        <div style={{marginTop:10}}>
+          <label style={{fontSize:12,color:'#94a3b8',display:'block',marginBottom:5}}>Type de rémunération</label>
+          <select value={compensationType} onChange={e=>setCompensationType(e.target.value)} style={{width:'100%',padding:13,borderRadius:12,background:'rgba(255,255,255,.06)',border:'1px solid rgba(255,255,255,.14)',color:'#fff',boxSizing:'border-box'}}>
+            {['Payé','Défraiement','Dédommagement','Bénévole'].map(c=><option key={c} value={c} style={{color:'#000'}}>{c}</option>)}
+          </select>
+        </div>
         {!sent ? <button onClick={sendToAll} style={{...button(colors.intermediaire),border:'none',cursor:'pointer',marginTop:12}}>Envoyer à {shortlist.length} talent{shortlist.length>1?'s':''}</button>
         : <div style={{marginTop:12}}>
             <Badge c={colors.core}>✓ ENVOYÉ</Badge>
