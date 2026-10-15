@@ -7,7 +7,7 @@ export const mediaProofs = [
 ];
 
 export const onboardingPaths = [
-  { id:'self', title:'Inscription personnelle directe', route:'/talent-onboarding/self', color:'#39FF88', steps:['LinkedIn import','AI scan public web','Media proof validation','TSAAK score generated'] },
-  { id:'intermediaire', title:'Invitation intermédiaire', route:'/talent-onboarding/intermediaire', color:'#FF4FD8', steps:['Booker identifies external talent','Invite sent','Talent accepts','Profile becomes bookable'] },
-  { id:'ai', title:'Invitation TSAAK via IA Search', route:'/talent-onboarding/ai', color:'#00E5FF', steps:['Patchwork detects external expert','AI checks media potential','TSAAK sends invite','Talent joins from demand'] }
+  { id:'self', title:'Inscription personnelle directe', route:'/expert-onboarding/self', color:'#39FF88', steps:['LinkedIn import','AI scan public web','Media proof validation','TSAAK score generated'] },
+  { id:'intermediaire', title:'Invitation facilitateur', route:'/expert-onboarding/facilitateur', color:'#FF4FD8', steps:['Programmateur identifies external expert','Invite sent','Expert accepts','Profile becomes bookable'] },
+  { id:'ai', title:'Invitation TSAAK via IA Search', route:'/expert-onboarding/ai', color:'#00E5FF', steps:['Patchwork detects external expert','AI checks media potential','TSAAK sends invite','Expert joins from demand'] }
 ];

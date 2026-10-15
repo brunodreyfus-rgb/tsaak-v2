@@ -16,7 +16,7 @@ export default function Wanted(){
     <Masthead active='recherche'/>
     <Badge c={colors.media}>BUSINESS CASE · WANTED</Badge>
     <h1 style={{fontSize:48,maxWidth:900}}>Wanted cockpit</h1>
-    <p style={{color:'#C9D4E4',fontSize:18,maxWidth:880}}>Publiez un besoin précis. Les intermédiaires et bookers le voient dans leur inbox et proposent des talents.</p>
+    <p style={{color:'#C9D4E4',fontSize:18,maxWidth:880}}>Publiez un besoin précis. Les facilitateurs et programmateurs le voient dans leur inbox et proposent des experts.</p>
 
     <Stepper c={colors.media} active={stageIdx} steps={STATUSES}/>
 
@@ -38,15 +38,15 @@ export default function Wanted(){
           <input value={w.deadline} onChange={e=>set('deadline',e.target.value)} style={inp} placeholder='Deadline'/>
           <textarea value={w.brief} onChange={e=>set('brief',e.target.value)} style={{...inp,minHeight:100}} placeholder='Brief'/>
         </div>
-        <button onClick={()=>set('status','Open')} style={{...button(colors.media),border:'none',cursor:'pointer',marginTop:12}}>Publier aux intermédiaires</button>
+        <button onClick={()=>set('status','Open')} style={{...button(colors.media),border:'none',cursor:'pointer',marginTop:12}}>Publier aux facilitateurs</button>
       </section>
 
       <section style={card(colors.intermediaire)}>
         <h2>Statut</h2>
         <p style={{color:'#C9D4E4'}}><b>{proposals.length}</b> proposition{proposals.length>1?'s':''} reçue{proposals.length>1?'s':''} · statut actuel : <b style={{color:colors.core}}>{w.status}</b></p>
-        <p style={{color:'#94a3b8',fontSize:13}}>Les intermédiaires répondent depuis leur cockpit (« Répondre à un Wanted »).</p>
+        <p style={{color:'#94a3b8',fontSize:13}}>Les facilitateurs répondent depuis leur cockpit (« Répondre à un Wanted »).</p>
         <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
-          <a style={button(colors.intermediaire)} href='/intermediaires/respond'>Simuler une réponse d’intermédiaire</a>
+          <a style={button(colors.intermediaire)} href='/facilitateurs/respond'>Simuler une réponse de facilitateur</a>
           <a style={button(colors.media)} href='/media/proposals'>Voir les propositions →</a>
         </div>
       </section>

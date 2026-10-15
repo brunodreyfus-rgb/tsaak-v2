@@ -7,9 +7,9 @@ export default function Signup(){
       <h1 style={{fontSize:28}}>Créer un compte TSAAK</h1>
       <p style={{color:'#94a3b8'}}>Email classique ou connexion LinkedIn simulée — au choix.</p>
       <a style={{...button(colors.talent),display:'block',border:'none'}} href="/select-caste">Démarrer avec un email</a>
-      <a style={{...button('#0A66C2'),display:'flex',alignItems:'center',justifyContent:'center',gap:10,marginTop:10}} href="/talent-onboarding/self">
+      <a style={{...button('#0A66C2'),display:'flex',alignItems:'center',justifyContent:'center',gap:10,marginTop:10}} href="/expert-onboarding/self">
         <span style={{width:20,height:20,borderRadius:5,background:'#fff',color:'#0A66C2',display:'grid',placeItems:'center',fontWeight:900,fontSize:11}}>in</span>
-        Je suis Talent → connexion LinkedIn
+        Je suis Expert → connexion LinkedIn
       </a>
     </div>
   </main>;

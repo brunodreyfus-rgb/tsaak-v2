@@ -3,7 +3,7 @@ import { page, card, button, colors, Badge, Progress, Masthead, CountUp, Slider,
 import { mediaProofs } from '../data/mediaProofs';
 
 const FACTORS = [
-  { k:'desirability', name:'Désirabilité du Talent', desc:'Demandes entrantes, rareté du sujet, tension marché, budget média.', weight:0.35, c:colors.talent },
+  { k:'desirability', name:'Désirabilité de l’Expert', desc:'Demandes entrantes, rareté du sujet, tension marché, budget média.', weight:0.35, c:colors.talent },
   { k:'fan', name:'Indice FanTSAak', desc:'Signaux communauté, recommandations, engagement sur contenus et suivis. Poids volontairement réduit au lancement — montée en puissance prévue en Phase 2.', weight:0.05, c:colors.communaute, phase2:true },
   { k:'media', name:'Passages média', desc:'TV, podcast, presse, tribunes, panels, séminaires et récence des preuves.', weight:0.35, c:colors.media },
   { k:'performance', name:'Performance', desc:'Fiabilité, rapidité de réponse, qualité brief, ponctualité, satisfaction post-intervention.', weight:0.25, c:colors.organisation },
@@ -21,7 +21,7 @@ export default function Score(){
   return <main style={page('talent')}>
     <Masthead active='score'/>
     <Badge c={colors.talent}>BUSINESS CASE · SCORE TSAAK</Badge>
-    <h1 style={{fontSize:52,maxWidth:920}}>Comment TSAAK calcule le score d'un Talent</h1>
+    <h1 style={{fontSize:52,maxWidth:920}}>Comment TSAAK calcule le score d'un Expert</h1>
     <p style={{color:'#C9D4E4',fontSize:19,maxWidth:900}}>Le score ne mesure pas seulement la notoriété : il mesure la capacité réelle à matcher, performer et créer de la valeur dans l'écosystème. Recalculé automatiquement et quotidiennement.</p>
 
     <Stepper c={colors.talent} active={stage} steps={STEPS} onStepClick={setStage} maxReached={STEPS.length-1}/>
@@ -30,7 +30,7 @@ export default function Score(){
       <div style={{fontSize:30}}>⇄</div>
       <div>
         <h2 style={{margin:'0 0 8px',fontSize:19}}>Une confiance à double sens</h2>
-        <p style={{color:'#C9D4E4',margin:0,fontSize:14}}>Le Score TSAAK note le Talent — mais après chaque intervention, le Talent note à son tour le Média ou l'Organisation (brief clair, respect des délais, paiement, accueil). Comme sur toute plateforme de mise en relation, la qualité de l'intervention elle-même engage les deux parties : TSAAK fournit le score de confiance mutuel et la traçabilité, pas une garantie de résultat sur ce qui se dit ou se passe en plateau.</p>
+        <p style={{color:'#C9D4E4',margin:0,fontSize:14}}>Le Score TSAAK note l'Expert — mais après chaque intervention, l'Expert note à son tour le Média ou l'Organisation (brief clair, respect des délais, paiement, accueil). Comme sur toute plateforme de mise en relation, la qualité de l'intervention elle-même engage les deux parties : TSAAK fournit le score de confiance mutuel et la traçabilité, pas une garantie de résultat sur ce qui se dit ou se passe en plateau.</p>
       </div>
     </section>
 
@@ -75,7 +75,7 @@ export default function Score(){
       <section style={card(colors.talent)}>
         <h2>Où le score TSAAK compte</h2>
         <div style={{display:'flex',gap:10,flexWrap:'wrap',marginTop:10}}>
-          <a style={button(colors.talent)} href='/talent/sarah-benali'>Voir exemple Sarah Benali</a>
+          <a style={button(colors.talent)} href='/expert/sarah-benali'>Voir exemple Sarah Benali</a>
           <a style={button(colors.intermediaire)} href='/mercato'>Voir l'impact sur le Mercato</a>
           <a style={button(colors.organisation)} href='/contract'>Voir l'impact sur un contrat</a>
         </div>

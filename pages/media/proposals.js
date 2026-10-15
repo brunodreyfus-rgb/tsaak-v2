@@ -30,7 +30,7 @@ export default function MediaProposals(){
     <p style={{color:'#C9D4E4',fontSize:16,maxWidth:820}}><b>{wanted.title}</b> · {wanted.budget} · statut <b style={{color:colors.core}}>{wanted.status}</b></p>
 
     {proposals.length===0 ? <div style={{...card('rgba(255,255,255,.14)'),marginTop:10}}>
-      <p style={{color:'#94a3b8'}}>Aucune proposition encore — <a href='/intermediaires/respond' style={{color:colors.intermediaire}}>simuler une réponse d’intermédiaire</a>.</p>
+      <p style={{color:'#94a3b8'}}>Aucune proposition encore — <a href='/facilitateurs/respond' style={{color:colors.intermediaire}}>simuler une réponse de facilitateur</a>.</p>
     </div> : <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:16,marginTop:14}}>
       {proposals.map(p=><div key={p.id} style={card(p.status==='Selected'?colors.core:colors.media)}>
         {p.talentPhoto && <img src={p.talentPhoto} style={{width:'100%',height:140,objectFit:'cover',borderRadius:14}}/>}

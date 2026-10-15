@@ -4,11 +4,11 @@ import { talents } from '../data/talents';
 
 const ACTIVATIONS = [
   { k:'patchwork', label:'Patchwork : suggestions IA parmi les talents disponibles', c:colors.media },
-  { k:'inter', label:'Réseau intermédiaire : 14 bookers notifiés', c:colors.intermediaire },
-  { k:'talents', label:'Talents disponibles sous 2h identifiés et alertés', c:colors.talent },
+  { k:'inter', label:'Réseau facilitateurs : 14 programmateurs notifiés', c:colors.intermediaire },
+  { k:'talents', label:'Experts disponibles sous 2h identifiés et alertés', c:colors.talent },
 ];
 
-const CANDIDATES = [ { ...talents[3], tag:'Patchwork', c:colors.media, note:'Disponible immédiatement · déjà passé 2 fois sur ce sujet' }, { ...talents[13], tag:'Réseau intermédiaire', c:colors.intermediaire, note:'Proposé par Jean · TV ready en anglais' }, { ...talents[6], tag:'Talent disponible', c:colors.talent, note:'A activé sa disponibilité "Urgent" il y a 20 min' } ];
+const CANDIDATES = [ { ...talents[3], tag:'Patchwork', c:colors.media, note:'Disponible immédiatement · déjà passé 2 fois sur ce sujet' }, { ...talents[13], tag:'Réseau facilitateurs', c:colors.intermediaire, note:'Proposé par Jean · TV ready en anglais' }, { ...talents[6], tag:'Expert disponible', c:colors.talent, note:'A activé sa disponibilité "Urgent" il y a 20 min' } ];
 
 const STEPS = ['Brief','Activation','Réponses'];
 
@@ -30,7 +30,7 @@ export default function HelpMe(){
     <Masthead active='help'/>
     <Badge c={c}>BUSINESS CASE · HELP ME URGENT</Badge>
     <h1 style={{fontSize:50,maxWidth:900}}>Besoin d'un guest en moins de 2h</h1>
-    <p style={{color:'#C9D4E4',fontSize:19,maxWidth:880}}>Le média ne cherche pas : il décrit son besoin et TSAAK active Patchwork, le réseau d'intermédiaires et les talents disponibles, en même temps.</p>
+    <p style={{color:'#C9D4E4',fontSize:19,maxWidth:880}}>Le média ne cherche pas : il décrit son besoin et TSAAK active Patchwork, le réseau de facilitateurs et les experts disponibles, en même temps.</p>
 
     <Stepper c={c} active={stage} steps={STEPS} onStepClick={stage===2?setStage:undefined} maxReached={2}/>
 

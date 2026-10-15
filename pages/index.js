@@ -1,18 +1,18 @@
 import { PERSONAS } from '../components/RichDemoUI';
 import { talents, realTalents } from '../data/talents';
 
-const NAV = [ ['/search','Talents'], ['#comment-ca-marche','Comment ça marche'], ['/select-caste','Castes'] ];
+const NAV = [ ['/search','Experts'], ['#comment-ca-marche','Comment ça marche'], ['/select-caste','Castes'] ];
 
 const CASTE_META = {
   media: { label:'Media', sub:'Rédactions & producteurs' },
-  talent: { label:'Talent', sub:'Experts & speakers' },
-  intermediaire: { label:'Intermédiaire', sub:'Bookers & agents' },
+  talent: { label:'Expert', sub:'Experts & speakers' },
+  intermediaire: { label:'Facilitateur', sub:'Programmateurs & agents' },
   organisation: { label:'Organisation', sub:'Marques & événements' },
   communaute: { label:'Communauté', sub:'FanTSAak & signaux' },
 };
 
 const FEATURES = [
-  { title:'Connexion LinkedIn', text:'Import instantané du profil + scan IA des preuves média — un profil Talent prêt en 30 secondes.', href:'/talent-onboarding/self', color:'#7CFFB2', icon:'in' },
+  { title:'Connexion LinkedIn', text:'Import instantané du profil + scan IA des preuves média — un profil Expert prêt en 30 secondes.', href:'/expert-onboarding/self', color:'#7CFFB2', icon:'in' },
   { title:'Contrat & paiement', text:'Template → signature électronique → paiement sécurisé, sans échange de PDF ni relance.', href:'/contract', color:'#FF9B3D', icon:'€' },
   { title:'Score TSAAK transparent', text:'4 leviers pondérés, recalculés en direct — chaque acteur voit exactement pourquoi.', href:'/score-explained', color:'#F6FF00', icon:'◎' },
   { title:'Mercato saisonnier', text:'2 mois par an : médias et guests se repositionnent, 3 paliers de contrat indexés au score.', href:'/mercato', color:'#FF2FD6', icon:'⇄' },
@@ -39,19 +39,19 @@ export default function Home(){
       <div style={s.heroGrid}>
         <div style={s.heroText}>
           <span style={s.kicker}>TSAAK · EASY BOOKING ECOSYSTEM</span>
-          <h1 style={s.title}>Bookez le meilleur talent pour vos besoins.<br/>En quelques clics, pas en semaines.</h1>
-          <p style={s.sub}>TSAAK connecte rédactions, talents, intermédiaires, organisations et communautés dans un seul écosystème : recherche, scoring, contrats et paiement — sans friction, sans PDF perdu.</p>
+          <h1 style={s.title}>Bookez le meilleur expert pour vos besoins.<br/>En quelques clics, pas en semaines.</h1>
+          <p style={s.sub}>TSAAK connecte rédactions, experts, facilitateurs, organisations et communautés dans un seul écosystème : recherche, scoring, contrats et paiement — sans friction, sans PDF perdu.</p>
           <div style={s.ctas}>
-            <a style={s.primary} href="/search">Découvrir les talents →</a>
+            <a style={s.primary} href="/search">Découvrir les experts →</a>
             <a style={s.secondary} href="/select-caste">Rejoindre TSAAK</a>
           </div>
         </div>
-        <a href="/select-caste" style={s.conceptFrame} title="Cinq castes, un Talent au centre — la galaxie TSAAK">
-          <img src="/images/galaxy-concept.jpg" alt="Cinq castes, un Talent au centre — la galaxie TSAAK" style={s.conceptImg}/>
+        <a href="/select-caste" style={s.conceptFrame} title="Cinq castes, un Expert au centre — la galaxie TSAAK">
+          <img src="/images/galaxy-concept.jpg" alt="Cinq castes, un Expert au centre — la galaxie TSAAK" style={s.conceptImg}/>
         </a>
       </div>
       <div style={s.metrics}>
-        <Metric n="50" t="talents vérifiés"/>
+        <Metric n="50" t="experts vérifiés"/>
         <Metric n="5" t="castes connectées"/>
         <Metric n="<2h" t="délai moyen Help Me"/>
         <Metric n="100%" t="score transparent"/>
@@ -77,14 +77,14 @@ export default function Home(){
     </section>
 
     <section style={s.section}>
-      <SectionHead title="Des talents vérifiés, prêts à intervenir" sub="Score TSAAK, preuves média retrouvées par l'IA, disponibilité en temps réel."/>
+      <SectionHead title="Des experts vérifiés, prêts à intervenir" sub="Score TSAAK, preuves média retrouvées par l'IA, disponibilité en temps réel."/>
       <a href="/search" style={s.searchPreview}>
         <span style={s.searchIcon}>⌕</span>
         <span style={{color:'#8CA0B8'}}>Ex : “expert IA société”, “ancien militaire”, “climat énergie keynote”…</span>
         <span style={s.searchGo}>Rechercher →</span>
       </a>
       <div style={s.talentGrid}>
-        {previewTalents.filter(Boolean).map(t=><a key={t.id} href={`/talent/${t.id}`} style={s.talentCard}>
+        {previewTalents.filter(Boolean).map(t=><a key={t.id} href={`/expert/${t.id}`} style={s.talentCard}>
           <img src={t.photo} style={s.talentPhoto}/>
           <b style={{margin:'12px 0 2px',display:'block'}}>{t.name}</b>
           <span style={{color:'#8CA0B8',fontSize:12}}>{t.role} · {t.country}</span>
@@ -94,7 +94,7 @@ export default function Home(){
           </div>
         </a>)}
       </div>
-      <a href="/search" style={s.seeAll}>Voir tous les talents →</a>
+      <a href="/search" style={s.seeAll}>Voir tous les experts →</a>
     </section>
 
     <section id="comment-ca-marche" style={s.section}>
@@ -114,7 +114,7 @@ export default function Home(){
         <p style={{color:'#8CA0B8',maxWidth:340,fontSize:14}}>Easy booking ecosystem — la marketplace qui connecte les castes, les signaux et les opportunités média.</p>
       </div>
       <div style={s.footerCols}>
-        <FooterCol title="Produit" links={[['Talents','/search'],['Castes','/select-caste'],['Comment ça marche','#comment-ca-marche']]}/>
+        <FooterCol title="Produit" links={[['Experts','/search'],['Castes','/select-caste'],['Comment ça marche','#comment-ca-marche']]}/>
         <FooterCol title="Cas d'usage" links={[['Score TSAAK','/score-explained'],['Contrat & paiement','/contract'],['Mercato','/mercato'],['Patchwork','/patchwork']]}/>
         <FooterCol title="Démo investisseur" links={[['Mode démo','/demo'],['Se connecter','/select-caste']]}/>
       </div>

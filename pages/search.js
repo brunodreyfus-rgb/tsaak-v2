@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { page, card, button, colors, Badge, Masthead, Chip, useLocal } from '../components/RichDemoUI';
 import { talents, realTalents } from '../data/talents';
 
-const ALL_TAGS = ['AI & society','Middle East','energy security','climate transition','defense','cyber risk','public health','future of work','space economy','social movements','TV ready','Keynote ready','Verified','High demand','Talent TSAAK'];
+const ALL_TAGS = ['AI & society','Middle East','energy security','climate transition','defense','cyber risk','public health','future of work','space economy','social movements','TV ready','Keynote ready','Verified','High demand','Expert TSAAK'];
 const allTalents = [...(realTalents || []), ...talents];
 
 export default function Search(){
@@ -29,7 +29,7 @@ export default function Search(){
     <Masthead active='recherche'/>
     <Badge c={colors.media}>BUSINESS CASE · RECHERCHE</Badge>
     <h1 style={{fontSize:48,maxWidth:900}}>Recherche proactive multi-critères</h1>
-    <p style={{color:'#C9D4E4',fontSize:18,maxWidth:880}}>Tapez un besoin (sujet, format, pays…) ou filtrez par tag. Les résultats se mettent à jour en direct sur les 50 talents de la base démo.</p>
+    <p style={{color:'#C9D4E4',fontSize:18,maxWidth:880}}>Tapez un besoin (sujet, format, pays…) ou filtrez par tag. Les résultats se mettent à jour en direct sur les 50 experts de la base démo.</p>
 
     <div style={{...card(colors.media),marginTop:6}}>
       <input value={q} onChange={e=>setQ(e.target.value)} placeholder='Ex : “expert IA société”, “ancien militaire”, “climat énergie keynote”…' style={{width:'100%',padding:16,borderRadius:14,background:'rgba(255,255,255,.07)',border:'1px solid rgba(255,255,255,.16)',color:'#fff',boxSizing:'border-box',fontSize:15}}/>
@@ -51,7 +51,7 @@ export default function Search(){
           <p style={{margin:'8px 0'}}><b style={{color:colors.talent}}>Score {t.score}</b> · {t.price}</p>
           <p style={{color:'#C9D4E4',fontSize:12}}>{t.aiFound && t.aiFound[0]}</p>
           <div style={{display:'flex',gap:8,marginTop:8}}>
-            <a href={`/talent/${t.id}`} style={{...button(colors.media),padding:'9px 12px',fontSize:12}}>Profil</a>
+            <a href={`/expert/${t.id}`} style={{...button(colors.media),padding:'9px 12px',fontSize:12}}>Profil</a>
             <button onClick={()=>toggle(t)} style={{...button(inList?colors.core:colors.intermediaire),padding:'9px 12px',fontSize:12,border:'none',cursor:'pointer'}}>{inList?'✓ Dans la shortlist':'+ Shortlist'}</button>
           </div>
         </div>;

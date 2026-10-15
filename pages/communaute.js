@@ -11,14 +11,14 @@ export default function Communaute(){
     </div>
 
     <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))',gap:14,marginBottom:18}}>
-      <StatCard c={c} label='Talents suivis' value='28'/>
+      <StatCard c={c} label='Experts suivis' value='28'/>
       <StatCard c={c} label='Recommandations utiles' value='6' delta='+2 cette semaine'/>
       <StatCard c={colors.core} label='Indice FanTSAak' value='81%'/>
       <StatCard c={c} label='Guests investis (Mercato)' value='2'/>
     </div>
 
     <div style={{display:'grid',gridTemplateColumns:'1.1fr 1.4fr',gap:16,marginBottom:26,alignItems:'stretch'}}>
-      <PerfCard c={c} title='Indice FanTSAak' value='81%' data={[61,66,70,73,76,79,81]} caption='Poids de vos signaux dans le score des Talents que vous suivez.'/>
+      <PerfCard c={c} title='Indice FanTSAak' value='81%' data={[61,66,70,73,76,79,81]} caption='Poids de vos signaux dans le score des Experts que vous suivez.'/>
       <ActivityCard c={c} title='Signaux récents' badge='6 cette semaine' rows={[
         { avatar:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&auto=format&fit=crop', title:'Recommandation — Sarah Benali', subtitle:'Partagée à 340 abonnés', right:'+4 pts', rightColor:colors.core },
         { icon:'💸', title:'Investissement Kaastbase — Guest Tier 2K', subtitle:'Mise actuelle : 180 €', right:'Actif', rightColor:c },

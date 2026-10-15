@@ -45,7 +45,7 @@ export default function Messaging(){
     <Masthead active='recherche'/>
     <Badge c={colors.media}>BUSINESS CASE · MESSAGERIE</Badge>
     <h1 style={{fontSize:44}}>Messagerie</h1>
-    <p style={{color:'#C9D4E4',fontSize:16,maxWidth:800,marginBottom:20}}>Les envois multi-message depuis la <a href='/shortlist' style={{color:colors.media}}>shortlist</a> créent un fil par talent. Écrivez, et une réponse arrive automatiquement.</p>
+    <p style={{color:'#C9D4E4',fontSize:16,maxWidth:800,marginBottom:20}}>Les envois multi-message depuis la <a href='/shortlist' style={{color:colors.media}}>shortlist</a> créent un fil par expert. Écrivez, et une réponse arrive automatiquement.</p>
 
     <div style={{display:'grid',gridTemplateColumns:'280px 1fr',gap:18}}>
       <div style={card(colors.media)}>

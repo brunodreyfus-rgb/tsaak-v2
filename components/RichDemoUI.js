@@ -4,7 +4,7 @@ export function page(theme='media'){
   const c = colors[theme] || colors.media;
   return { minHeight:'100vh', color:'#F7FBFF', fontFamily:'Arial, sans-serif', padding:32, background:`radial-gradient(circle at 15% 10%, ${c}22, transparent 28%), radial-gradient(circle at 90% 0%, #F6FF0020, transparent 22%), linear-gradient(135deg,#02030A,#080B18 45%,#02030A)` };
 }
-export function nav(c=colors.media){ return <div style={{display:'flex',gap:12,alignItems:'center',marginBottom:28,flexWrap:'wrap'}}><a href='/' style={link(c)}>Home</a><a href='/demo' style={link(c)}>Mode démo</a><a href='/patchwork' style={link(c)}>Patchwork</a><a href='/talent-onboarding' style={link(c)}>Onboarding talent</a><a href='/score-explained' style={link(c)}>Score</a></div> }
+export function nav(c=colors.media){ return <div style={{display:'flex',gap:12,alignItems:'center',marginBottom:28,flexWrap:'wrap'}}><a href='/' style={link(c)}>Home</a><a href='/demo' style={link(c)}>Mode démo</a><a href='/patchwork' style={link(c)}>Patchwork</a><a href='/expert-onboarding' style={link(c)}>Onboarding expert</a><a href='/score-explained' style={link(c)}>Score</a></div> }
 export function link(c){return {color:'#fff',textDecoration:'none',padding:'10px 14px',border:`1px solid ${c}55`,borderRadius:999,background:'#ffffff08'}}
 export function card(c=colors.media){return {border:`1px solid ${c}44`,background:'linear-gradient(180deg,#ffffff12,#ffffff06)',boxShadow:`0 0 36px ${c}18`,borderRadius:28,padding:24,backdropFilter:'blur(14px)'}}
 export function button(c=colors.media){return {display:'inline-flex',alignItems:'center',justifyContent:'center',gap:8,padding:'13px 18px',borderRadius:999,border:`1px solid ${c}`,background:`linear-gradient(135deg,${c}33,#ffffff10)`,color:'#fff',textDecoration:'none',boxShadow:`0 0 26px ${c}33`,fontWeight:800}}
@@ -111,7 +111,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export const BIZ_CASES = [
-  { key:'linkedin', label:'Connexion LinkedIn', href:'/talent-onboarding/self', c:colors.talent, icon:'in' },
+  { key:'linkedin', label:'Connexion LinkedIn', href:'/expert-onboarding/self', c:colors.talent, icon:'in' },
   { key:'contract', label:'Contrat & Paiement', href:'/contract', c:colors.organisation, icon:'€' },
   { key:'score', label:'Score TSAAK', href:'/score-explained', c:colors.core, icon:'◎' },
   { key:'mercato', label:'Mercato', href:'/mercato', c:colors.intermediaire, icon:'⇄' }
@@ -186,8 +186,8 @@ export function Stepper({steps,active,c=colors.media,onStepClick,maxReached}){
 
 export const PERSONAS = [
   { key:'media', name:'Bruno', role:'Media · Senior Producer, France 24', href:'/media', c:colors.media, photo:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=240&auto=format&fit=crop' },
-  { key:'talent', name:'Sarah Benali', role:'Talent · Analyste Géopolitique', href:'/talent', c:colors.talent, photo:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop' },
-  { key:'intermediaire', name:'Jean', role:'Intermédiaire · Booker international', href:'/intermediaires', c:colors.intermediaire, photo:'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=240&auto=format&fit=crop' },
+  { key:'talent', name:'Sarah Benali', role:'Expert · Analyste Géopolitique', href:'/expert', c:colors.talent, photo:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop' },
+  { key:'intermediaire', name:'Jean', role:'Facilitateur · Programmateur international', href:'/facilitateurs', c:colors.intermediaire, photo:'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=240&auto=format&fit=crop' },
   { key:'organisation', name:'Pascale', role:'Organisation · Directrice événementiel', href:'/organisation', c:colors.organisation, photo:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=240&auto=format&fit=crop' },
   { key:'communaute', name:'Jessica', role:'Communauté · FanTSAak', href:'/communaute', c:colors.communaute, photo:'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=240&auto=format&fit=crop' },
 ];
@@ -210,8 +210,8 @@ export function Avatar({src,name,role,big=false}){return <div style={{display:'f
 // ---- Mode Découverte : parcours guidés pas-à-pas par business case ----
 export const DISCOVERY_CASES = [
   { key:'linkedin', label:'Connexion LinkedIn', c:colors.talent, steps:[
-    { label:'Importer le profil LinkedIn', href:'/talent-onboarding/self' },
-    { label:'Voir le profil généré', href:'/talent/sarah-benali' },
+    { label:'Importer le profil LinkedIn', href:'/expert-onboarding/self' },
+    { label:'Voir le profil généré', href:'/expert/sarah-benali' },
   ]},
   { key:'contract', label:'Contrat & paiement', c:colors.organisation, steps:[
     { label:'Générer et signer le contrat', href:'/contract' },
@@ -223,8 +223,8 @@ export const DISCOVERY_CASES = [
     { label:'Explorer le Mercato', href:'/mercato' },
   ]},
   { key:'search', label:'Recherche', c:colors.media, steps:[
-    { label:'Rechercher un talent', href:'/search' },
-    { label:'Ouvrir un profil Talent', href:'/talent/sarah-benali' },
+    { label:'Rechercher un expert', href:'/search' },
+    { label:'Ouvrir un profil Expert', href:'/expert/sarah-benali' },
     { label:'Envoyer un message', href:'/messaging' },
   ]},
   { key:'shortlist', label:'Shortlist & multi-messaging', c:colors.media, steps:[
@@ -236,7 +236,7 @@ export const DISCOVERY_CASES = [
   ]},
   { key:'wanted', label:'Wanted → Propositions', c:colors.media, steps:[
     { label:'Publier un Wanted', href:'/wanted' },
-    { label:"Répondre comme intermédiaire", href:'/intermediaires/respond' },
+    { label:"Répondre comme facilitateur", href:'/facilitateurs/respond' },
     { label:'Voir les propositions reçues', href:'/media/proposals' },
   ]},
   { key:'ai-search', label:'Recherche IA (chat)', c:colors.media, steps:[
@@ -246,13 +246,13 @@ export const DISCOVERY_CASES = [
   { key:'help-me', label:'Help Me urgent', c:colors.organisation, steps:[
     { label:'Publier un besoin urgent', href:'/help-me' },
   ]},
-  { key:'talent-entry', label:'3 entrées Talent', c:colors.talent, steps:[
-    { label:"Choisir un parcours d'entrée", href:'/talent-onboarding' },
-    { label:'Compléter le profil en self-service', href:'/talent-onboarding/self' },
+  { key:'talent-entry', label:'3 entrées Expert', c:colors.talent, steps:[
+    { label:"Choisir un parcours d'entrée", href:'/expert-onboarding' },
+    { label:'Compléter le profil en self-service', href:'/expert-onboarding/self' },
   ]},
-  { key:'talent-profile', label:'Profil Talent riche', c:colors.talent, steps:[
-    { label:'Explorer un profil Talent complet', href:'/talent/sarah-benali' },
-    { label:'Contacter ce talent', href:'/messaging' },
+  { key:'talent-profile', label:'Profil Expert riche', c:colors.talent, steps:[
+    { label:'Explorer un profil Expert complet', href:'/expert/sarah-benali' },
+    { label:'Contacter cet expert', href:'/messaging' },
   ]},
 ];
 

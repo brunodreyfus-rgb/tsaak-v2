@@ -1,7 +1,7 @@
 export const casteThemes = {
   media:{name:'Media', color:'#00E5FF', letter:'M', accent:'cyan', role:'Journalistes, producteurs, rédactions'},
-  talent:{name:'Talent', color:'#00FF85', letter:'T', accent:'green', role:'Experts, créateurs, speakers'},
-  intermediaire:{name:'Intermédiaire', color:'#FF2BD6', letter:'I', accent:'magenta', role:'Agents, bookers, curateurs'},
+  talent:{name:'Expert', color:'#00FF85', letter:'T', accent:'green', role:'Experts, créateurs, speakers'},
+  intermediaire:{name:'Facilitateur', color:'#FF2BD6', letter:'I', accent:'magenta', role:'Agents, programmateurs, curateurs'},
   organisation:{name:'Organisation', color:'#FF8A00', letter:'O', accent:'orange', role:'Entreprises, conférences, institutions'},
   communaute:{name:'Communauté', color:'#3B82FF', letter:'C', accent:'blue', role:'Fans, communautés, signaux faibles'}
 };
@@ -21,10 +21,10 @@ export const talents = names.map((name,i)=>({
     {type:'Written', title:'Opinion column and expert quote', source:i%2?'Le Monde':'Financial Times'}
   ],
   aiFound:[`Trending signal detected on ${topics[i%topics.length]}`, '3 credible media traces found', 'Strong match with current Wanted brief'],
-  tsaakBackground:['Profile verified by TSAAK', 'Fast response history', 'Recommended by 2 intermediaries']
+  tsaakBackground:['Profile verified by TSAAK', 'Fast response history', 'Recommended by 2 facilitators']
 }));
 
-// Sarah Benali est la Talent "porte d'entrée" de la démo (persona de connexion + parcours
+// Sarah Benali est l'Expert "porte d'entrée" de la démo (persona de connexion + parcours
 // Connexion LinkedIn) : photo réelle et score alignés sur ce qui est affiché après connexion,
 // pour que ce soit la même personne du login jusqu'au profil complet.
 const _sarah = talents.find(t=>t.id==='sarah-benali');
@@ -42,7 +42,7 @@ export const realTalents = [
   {
     id:'jeremie-mani', name:'Jérémie Mani', role:'CEO Webhelp Canada', country:'Canada',
     photo:'/avatars/jeremie-mani.png', score:85, price:'Sur devis',
-    languages:['FR','EN'], tags:['Outsourcing','Entrepreneuriat à impact','Talent TSAAK'],
+    languages:['FR','EN'], tags:['Outsourcing','Entrepreneuriat à impact','Expert TSAAK'],
     linkedin:{headline:'CEO Webhelp Canada · co-fondateur Podcasthon.org', followers:'—', company:'Webhelp Canada'},
     media:[
       {type:'Audio', title:'Invité — "Parlons de votre mental" (podcast)', source:'Podcast'},
@@ -54,22 +54,21 @@ export const realTalents = [
     tsaakBackground:['Profil généré via le générateur TSAAK à partir d’informations publiques', 'Exemple concret présenté aux investisseurs']
   },
   {
-    id:'david-hammel', name:'David Hammel', role:'Fondateur & CEO, Tsinor Venture Studio', country:'France',
-    photo:'/avatars/david-hammel.png', score:70, price:'Sur devis',
-    languages:['FR','EN'], tags:['Venture Studio','IA pour le BTP','Talent TSAAK'],
-    linkedin:{headline:'Fondateur & CEO, Tsinor Venture Studio', followers:'—', company:'Tsinor Venture Studio'},
+    id:'entrepreneur-btp', name:'Entrepreneur BTP & Venture Studio', role:'Fondateur & CEO (profil anonymisé)', country:'France',
+    photo:'/avatars/profile-anonymized.png', score:70, price:'Sur devis',
+    languages:['FR','EN'], tags:['Venture Studio','IA pour le BTP','Expert TSAAK'],
+    linkedin:{headline:'Fondateur & CEO (profil anonymisé)', followers:'—', company:'—'},
     media:[
-      {type:'Written', title:'Interview — thèse IA de Tsinor Venture Studio', source:'CAO.fr'},
-      {type:'Written', title:'"L’IA ne remplacera jamais un artisan, elle l’assistera"', source:'Mesinfos / Affiches Parisiennes'},
-      {type:'Video', title:'Participation de Tsinor à la levée de fonds de Life Plus (3M€)', source:'Fusacq / Banque des Territoires'}
+      {type:'Written', title:'Interview presse — thèse sur l’IA appliquée au BTP', source:'Presse spécialisée'},
+      {type:'Written', title:'Tribune sur l’accompagnement de levées de fonds', source:'Presse économique'}
     ],
-    aiFound:['16 ans à la tête du groupe familial AYOR (BTP)', 'Fondateur d’InProcess, à l’origine de Tsinor', 'Investisseur actif via Tsinor Venture Studio'],
-    tsaakBackground:['Profil généré via le générateur TSAAK à partir d’informations publiques', 'Exemple concret présenté aux investisseurs']
+    aiFound:['16 ans à la tête d’un groupe familial BTP, puis fondateur d’un venture studio', '2 interviews presse recensées : solide, mais pas de passage média récurrent'],
+    tsaakBackground:['Profil généré via le générateur TSAAK à partir d’informations publiques', 'Exemple concret présenté aux investisseurs (profil anonymisé)']
   },
   {
     id:'bruno-dreyfus', name:'Bruno Dreyfus', role:'Co-CEO, TSAAK', country:'—',
     photo:'/avatars/bruno-dreyfus.png', score:28, price:'—',
-    languages:['FR','EN'], tags:['Bijouterie','Innovation data','Talent TSAAK'],
+    languages:['FR','EN'], tags:['Bijouterie','Innovation data','Expert TSAAK'],
     linkedin:{headline:'Tenengroup', followers:'—', company:'Tenengroup'},
     media:[],
     aiFound:['Aucune présence média publique recensée à ce jour'],
@@ -78,7 +77,7 @@ export const realTalents = [
   {
     id:'jonathan-allouche', name:'Jonathan Allouche', role:'Co-CEO, TSAAK', country:'Israël / France',
     photo:'/avatars/jonathan-allouche.png', score:68, price:'Sur devis',
-    languages:['FR','EN','HE'], tags:['Stand-up & production', 'Metaverse', 'Talent TSAAK'],
+    languages:['FR','EN','HE'], tags:['Stand-up & production', 'Metaverse', 'Expert TSAAK'],
     linkedin:{headline:'CEO Writing Metavers · Fondateur, Comedy Club Academy', followers:'—', company:'Writing Metavers'},
     media:[
       {type:'Written', title:'"À Tel Aviv, l’humour comme arme de résilience" — le Comedy Club Academy prépare son premier grand spectacle', source:'i24NEWS'},

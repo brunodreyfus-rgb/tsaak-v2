@@ -5,9 +5,9 @@ import { talents } from '../data/talents';
 
 const t = talents;
 const picks = [
-  { talent:t[0], tag:'TSAAK Talent', why:['Trending topic : sécurité mer Rouge','2 passages TV récents','Score de clarté élevé'], score:94, c:colors.talent, external:false },
+  { talent:t[0], tag:'TSAAK Expert', why:['Trending topic : sécurité mer Rouge','2 passages TV récents','Score de clarté élevé'], score:94, c:colors.talent, external:false },
   { talent:{ name:'Prof. Maya Chen', role:'Semiconductors · Asia', photo:'https://images.unsplash.com/photo-1554151228-14d9def656e4?w=500&auto=format&fit=crop' }, tag:'Hors TSAAK', why:['Détectée via une vidéo de conférence','Forte autorité éditoriale','Invitation recommandée'], score:91, c:colors.media, external:true },
-  { talent:t[13], tag:'Réseau intermédiaire', why:['Relation booker existante','TV ready en anglais','Disponibilité rapide'], score:89, c:colors.intermediaire, external:false },
+  { talent:t[13], tag:'Réseau facilitateurs', why:['Relation programmateur existante','TV ready en anglais','Disponibilité rapide'], score:89, c:colors.intermediaire, external:false },
 ];
 
 export default function Patchwork(){
@@ -15,7 +15,7 @@ export default function Patchwork(){
   const [shortlist,setShortlist] = useLocal('tsaak:shortlist', []);
 
   function follow(p,i){
-    if(p.external){ window.location.href='/talent-onboarding/ai'; return; }
+    if(p.external){ window.location.href='/expert-onboarding/ai'; return; }
     const talent = p.talent;
     if(!shortlist.some(x=>x.id===talent.id)) setShortlist([...shortlist, {id:talent.id,name:talent.name,role:talent.role,photo:talent.photo,score:talent.score,price:talent.price}]);
     setStatus(s=>({...s,[i]:'followed'}));
@@ -38,7 +38,7 @@ export default function Patchwork(){
           <h2 style={{margin:'10px 0 2px'}}>{p.talent.name}</h2>
           <p style={{color:'#C9D4E4',margin:0}}>{p.talent.role || p.talent.title}</p>
           <Progress label='Patchwork fit' value={p.score+'%'} c={p.c}/>
-          <h3 style={{marginBottom:6}}>Pourquoi ce talent ?</h3>
+          <h3 style={{marginBottom:6}}>Pourquoi cet expert ?</h3>
           {p.why.map(w=><p key={w} style={{color:'#DDE7F4',margin:'4px 0',fontSize:13}}>• {w}</p>)}
           {!st && <div style={{display:'flex',gap:10,flexWrap:'wrap',marginTop:10}}>
             <button onClick={()=>follow(p,i)} style={{...button(colors.core),border:'none',cursor:'pointer'}}>{p.external ? 'Inviter dans TSAAK' : '✓ Suivre'}</button>
@@ -50,7 +50,7 @@ export default function Patchwork(){
       })}
     </div>
 
-    {shortlist.length>0 && <p style={{marginTop:18,color:'#94a3b8'}}><a href='/shortlist' style={{color:colors.core}}>{shortlist.length} talent{shortlist.length>1?'s':''} en shortlist →</a></p>}
+    {shortlist.length>0 && <p style={{marginTop:18,color:'#94a3b8'}}><a href='/shortlist' style={{color:colors.core}}>{shortlist.length} expert{shortlist.length>1?'s':''} en shortlist →</a></p>}
 
     <h2 style={{marginTop:36}}>Preuves média utilisées par Patchwork</h2>
     <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(230px,1fr))',gap:16}}>{mediaProofs.map(p=><ProofCard key={p.title} p={p} c={colors.media}/>)}</div>

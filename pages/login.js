@@ -13,7 +13,7 @@ export default function Login(){
           <input placeholder='Mot de passe' type='password' style={inp}/>
         </div>
         <a style={{...button(colors.media),display:'block',marginTop:16,border:'none'}} href="/select-caste">Se connecter</a>
-        <a style={{...button('#0A66C2'),display:'flex',alignItems:'center',justifyContent:'center',gap:10,marginTop:10}} href="/talent-onboarding/self">
+        <a style={{...button('#0A66C2'),display:'flex',alignItems:'center',justifyContent:'center',gap:10,marginTop:10}} href="/expert-onboarding/self">
           <span style={{width:20,height:20,borderRadius:5,background:'#fff',color:'#0A66C2',display:'grid',placeItems:'center',fontWeight:900,fontSize:11}}>in</span>
           Continuer avec LinkedIn
         </a>

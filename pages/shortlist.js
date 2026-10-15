@@ -31,7 +31,7 @@ export default function Shortlist(){
     <p style={{color:'#C9D4E4',fontSize:18,maxWidth:880}}>Comparez les profils shortlistés depuis la <a href='/search' style={{color:colors.media}}>recherche</a> ou le <a href='/patchwork' style={{color:colors.media}}>Patchwork</a>, puis envoyez le même brief à tous en un clic.</p>
 
     {shortlist.length===0 ? <div style={{...card('rgba(255,255,255,.14)'),marginTop:10}}>
-      <p style={{color:'#94a3b8'}}>Aucun talent en shortlist pour l’instant.</p>
+      <p style={{color:'#94a3b8'}}>Aucun expert en shortlist pour l’instant.</p>
       <a style={button(colors.media)} href='/search'>Aller à la recherche</a>
     </div> : <>
       <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))',gap:14,marginTop:10}}>
@@ -44,7 +44,7 @@ export default function Shortlist(){
       </div>
 
       <section style={{...card(colors.intermediaire),marginTop:20}}>
-        <h2>Message à {shortlist.length} talent{shortlist.length>1?'s':''}</h2>
+        <h2>Message à {shortlist.length} expert{shortlist.length>1?'s':''}</h2>
         <p style={{color:'#94a3b8',fontSize:13}}>{shortlist.map(x=>x.name).join(' · ')}</p>
         <input value={subject} onChange={e=>setSubject(e.target.value)} style={{width:'100%',padding:14,borderRadius:12,background:'rgba(255,255,255,.06)',border:'1px solid rgba(255,255,255,.14)',color:'#fff',boxSizing:'border-box',marginBottom:10}}/>
         <textarea value={body} onChange={e=>setBody(e.target.value)} style={{width:'100%',minHeight:110,padding:14,borderRadius:12,background:'rgba(255,255,255,.06)',border:'1px solid rgba(255,255,255,.14)',color:'#fff',boxSizing:'border-box'}}/>
@@ -54,7 +54,7 @@ export default function Shortlist(){
             {['Payé','Défraiement','Dédommagement','Bénévole'].map(c=><option key={c} value={c} style={{color:'#000'}}>{c}</option>)}
           </select>
         </div>
-        {!sent ? <button onClick={sendToAll} style={{...button(colors.intermediaire),border:'none',cursor:'pointer',marginTop:12}}>Envoyer à {shortlist.length} talent{shortlist.length>1?'s':''}</button>
+        {!sent ? <button onClick={sendToAll} style={{...button(colors.intermediaire),border:'none',cursor:'pointer',marginTop:12}}>Envoyer à {shortlist.length} expert{shortlist.length>1?'s':''}</button>
         : <div style={{marginTop:12}}>
             <Badge c={colors.core}>✓ ENVOYÉ</Badge>
             <p style={{color:'#C9D4E4',marginTop:8}}>Message envoyé. Suivez les réponses dans la messagerie.</p>

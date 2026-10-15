@@ -6,7 +6,7 @@ export default function Organisation(){
   return <main style={page('organisation')}>
     <Masthead active='castes'/>
     <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:16,marginBottom:22}}>
-      <div><Badge c={c}>CASTE ORGANISATION</Badge><h1 style={{margin:'10px 0 4px'}}>Salut {me.name} 👋</h1><p style={{color:'#AAB3C5',margin:0}}>{me.role} — 3 panels peuvent être composés avec les talents shortlistés.</p></div>
+      <div><Badge c={c}>CASTE ORGANISATION</Badge><h1 style={{margin:'10px 0 4px'}}>Salut {me.name} 👋</h1><p style={{color:'#AAB3C5',margin:0}}>{me.role} — 3 panels peuvent être composés avec les experts shortlistés.</p></div>
       <img src={me.photo} style={{width:64,height:64,borderRadius:20,objectFit:'cover',border:`1px solid ${c}55`}}/>
     </div>
 

@@ -1,21 +1,21 @@
 import { page, card, button, colors, TsaakMark, Badge, Masthead, PERSONAS, Avatar } from '../components/RichDemoUI';
 
 const flagship = [
-  ['★ Connexion LinkedIn','Le Talent connecte LinkedIn, TSAAK importe le profil puis scanne le web pour retrouver ses preuves média.','/talent-onboarding/self',colors.talent],
+  ['★ Connexion LinkedIn','L’Expert connecte LinkedIn, TSAAK importe le profil puis scanne le web pour retrouver ses preuves média.','/expert-onboarding/self',colors.talent],
   ['★ Contrat & paiement','Template → variables → prévisualisation → signature électronique → paiement sécurisé.','/contract',colors.organisation],
   ['★ Calcul du score','4 leviers pondérés (désirabilité, FanTSAak, passages média, performance) recalculés en direct, en 4 étapes.','/score-explained',colors.core],
   ['★ Mercato','2 mois par an : médias et guests se positionnent, 3 paliers de contrat, investissement Kaastbase, en 4 étapes.','/mercato',colors.intermediaire],
 ];
 
 const cases=[
-  ['Recherche','Filtres live sujet / mots-clés / disponibilité sur 50 talents, ajout direct à la shortlist.','/search',colors.media],
+  ['Recherche','Filtres live sujet / mots-clés / disponibilité sur 50 experts, ajout direct à la shortlist.','/search',colors.media],
   ['Shortlist & multi-messaging','Composez un message et envoyez-le à toute la shortlist en un clic, avec réponses simulées.','/shortlist',colors.media],
   ['Patchwork','TSAAK pousse des guests TSAAK / hors TSAAK avant que le média cherche — suivre ou rejeter.','/patchwork',colors.intermediaire],
-  ['Wanted → Propositions','Publiez un besoin, un intermédiaire répond, sélectionnez et créez le contrat.','/wanted',colors.media],
+  ['Wanted → Propositions','Publiez un besoin, un facilitateur répond, sélectionnez et créez le contrat.','/wanted',colors.media],
   ['Recherche IA (chat)',"Le média discute avec l'IA, qui clarifie le besoin et propose une shortlist expliquée.",'/ai-search',colors.media],
   ['Help Me urgent','Formulaire de brief → activation en direct du réseau → réponses en 2 minutes.','/help-me',colors.organisation],
-  ['3 entrées Talent','Self signup, invitation intermédiaire, invitation TSAAK via IA Search.','/talent-onboarding',colors.talent],
-  ['Profil Talent riche','LinkedIn, vidéos, podcast, articles, séminaires et background TSAAK.','/talent/sarah-benali',colors.talent],
+  ['3 entrées Expert','Self signup, invitation facilitateur, invitation TSAAK via IA Search.','/expert-onboarding',colors.talent],
+  ['Profil Expert riche','LinkedIn, vidéos, podcast, articles, séminaires et background TSAAK.','/expert/sarah-benali',colors.talent],
 ];
 
 export default function Demo(){return <main style={page('media')}>

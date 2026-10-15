@@ -46,7 +46,7 @@ export default function Contract(){
         </select>
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
           <div><label style={lbl}>Média / Organisation</label><input value={ct.media} onChange={e=>set('media',e.target.value)} style={field()}/></div>
-          <div><label style={lbl}>Talent</label><input value={ct.talent} onChange={e=>set('talent',e.target.value)} style={field()}/></div>
+          <div><label style={lbl}>Expert</label><input value={ct.talent} onChange={e=>set('talent',e.target.value)} style={field()}/></div>
           <div><label style={lbl}>Date</label><input type='date' value={ct.date} onChange={e=>set('date',e.target.value)} style={field()}/></div>
           <div><label style={lbl}>Heure</label><input value={ct.time} onChange={e=>set('time',e.target.value)} style={field()}/></div>
           <div><label style={lbl}>Durée</label><input value={ct.duration} onChange={e=>set('duration',e.target.value)} style={field()}/></div>
@@ -65,8 +65,8 @@ export default function Contract(){
         <h2>Aperçu de l'engagement</h2>
         <p style={{color:'#94a3b8',fontSize:13}}>Réf : TSAAK-{new Date().getFullYear()}-{String(ct.price).padStart(4,'0')} · {ct.template}</p>
         <div style={{fontSize:14,color:'#C9D4E4',lineHeight:1.7,padding:16,borderRadius:14,background:'rgba(255,255,255,.04)'}}>
-          <p><b>{ct.talent}</b> (le Talent) s'engage à intervenir le <b>{ct.date}</b> à <b>{ct.time}</b>, pendant <b>{ct.duration}</b>, lieu : {ct.location} ({ct.deliverables.join(', ') || 'aucun livrable sélectionné'}).</p>
-          <p><b>{ct.media}</b> (le Media) s'engage à régler <b>{euro(ct.price)}</b> pour cette intervention, plus la commission de service TSAAK ({Math.round(commissionRate*100)}%) : <b>{euro(commission)}</b> — soit <b>{euro(total)}</b> au total, payable à la signature. Intermédiaire associé : {ct.intermediary}.</p>
+          <p><b>{ct.talent}</b> (l'Expert) s'engage à intervenir le <b>{ct.date}</b> à <b>{ct.time}</b>, pendant <b>{ct.duration}</b>, lieu : {ct.location} ({ct.deliverables.join(', ') || 'aucun livrable sélectionné'}).</p>
+          <p><b>{ct.media}</b> (le Media) s'engage à régler <b>{euro(ct.price)}</b> pour cette intervention, plus la commission de service TSAAK ({Math.round(commissionRate*100)}%) : <b>{euro(commission)}</b> — soit <b>{euro(total)}</b> au total, payable à la signature. Facilitateur associé : {ct.intermediary}.</p>
           <p style={{color:'#94a3b8',fontSize:13}}>Confidentialité : {ct.nda ? 'clause NDA applicable' : 'pas de clause NDA'}. Annulation possible jusqu'à J-1 sans frais. Ceci vaut acceptation des CGV TSAAK — pas de contrat séparé à signer entre les parties.</p>
           <p style={{color:colors.core,fontWeight:800}}>Total dû à la signature : {euro(total)}</p>
         </div>
@@ -76,7 +76,7 @@ export default function Contract(){
     {ct.stage===1 && <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:22}}>
       <section style={card(colors.organisation)}>
         <h2>Résumé de l'engagement</h2>
-        <p style={{color:'#C9D4E4'}}>Réf: TSAAK-{new Date().getFullYear()}-{String(ct.price).padStart(4,'0')} · {ct.media} ↔ Talent {ct.talent}</p>
+        <p style={{color:'#C9D4E4'}}>Réf: TSAAK-{new Date().getFullYear()}-{String(ct.price).padStart(4,'0')} · {ct.media} ↔ Expert {ct.talent}</p>
         <p style={{color:'#C9D4E4'}}>Montant: <b>{euro(ct.price)}</b> · {ct.date} à {ct.time} · {ct.duration}</p>
         <p style={{color:'#94a3b8',fontSize:13}}>En signant, {ct.talent} accepte cet engagement (CGV TSAAK), y compris le calendrier de paiement post-signature.</p>
       </section>
@@ -119,14 +119,14 @@ function PaymentStep({ct,setCt,total,commission,intermediaryFee}){
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}><input defaultValue='12/29' style={field()} placeholder='MM/AA'/><input defaultValue='123' style={field()} placeholder='CVV'/></div>
       </div> : <p style={{color:'#C9D4E4'}}>Vous serez redirigé vers PayPal pour confirmer le paiement de {euro(total)}.</p>}
       <button disabled={processing} onClick={pay} style={{...button(colors.talent),border:'none',cursor:'pointer',marginTop:16,opacity:processing?.6:1}}>{processing ? 'Paiement en cours…' : `Payer ${euro(total)} en toute sécurité`}</button>
-      <p style={{color:'#556',fontSize:12,marginTop:8}}>🔒 Transactions chiffrées et sécurisées. Paiement libéré au Talent après prestation.</p>
+      <p style={{color:'#556',fontSize:12,marginTop:8}}>🔒 Transactions chiffrées et sécurisées. Paiement libéré à l'Expert après prestation.</p>
     </section>
   </div>;
 }
 
 function DoneStep({ct,total,commission,intermediaryFee,reset}){
   function downloadReceipt(){
-    const txt = `TSAAK — Facture\nEngagement: TSAAK-${new Date().getFullYear()}-${String(ct.price).padStart(4,'0')}\nMédia: ${ct.media}\nTalent: ${ct.talent}\nDate prestation: ${ct.date} ${ct.time}\n\nPrestation: ${ct.price} EUR\nCommission service TSAAK: ${commission} EUR\nTotal payé: ${total} EUR\n\nSigné par: ${ct.signature}\nPayé le: ${new Date(ct.paidAt||Date.now()).toLocaleString('fr-FR')}\n`;
+    const txt = `TSAAK — Facture\nEngagement: TSAAK-${new Date().getFullYear()}-${String(ct.price).padStart(4,'0')}\nMédia: ${ct.media}\nExpert: ${ct.talent}\nDate prestation: ${ct.date} ${ct.time}\n\nPrestation: ${ct.price} EUR\nCommission service TSAAK: ${commission} EUR\nTotal payé: ${total} EUR\n\nSigné par: ${ct.signature}\nPayé le: ${new Date(ct.paidAt||Date.now()).toLocaleString('fr-FR')}\n`;
     const blob = new Blob([txt], {type:'text/plain'});
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href=url; a.download='tsaak-facture.txt'; a.click(); URL.revokeObjectURL(url);
@@ -134,17 +134,17 @@ function DoneStep({ct,total,commission,intermediaryFee,reset}){
   return <section style={{...card(colors.core)}}>
     <Badge c={colors.core}>✓ CONTRAT PAYÉ · PRESTATION PLANIFIÉE</Badge>
     <h2 style={{fontSize:34,margin:'12px 0'}}>Paiement confirmé — {total.toLocaleString('fr-FR')} € réglés</h2>
-    <p style={{color:'#C9D4E4'}}>La prestation a été automatiquement ajoutée aux dashboards de {ct.media} et de {ct.talent}. La commission de l’intermédiaire {ct.intermediary} passe de <b>Pending</b> à <b>Payable</b>.</p>
+    <p style={{color:'#C9D4E4'}}>La prestation a été automatiquement ajoutée aux dashboards de {ct.media} et de {ct.talent}. La commission du facilitateur {ct.intermediary} passe de <b>Pending</b> à <b>Payable</b>.</p>
     <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))',gap:14,margin:'18px 0'}}>
-      <Mini label='Commission intermédiaire' value={`${intermediaryFee.toLocaleString('fr-FR')} €`}/>
+      <Mini label='Commission facilitateur' value={`${intermediaryFee.toLocaleString('fr-FR')} €`}/>
       <Mini label='Commission TSAAK' value={`${commission.toLocaleString('fr-FR')} €`}/>
-      <Mini label='Net Talent' value={`${ct.price.toLocaleString('fr-FR')} €`}/>
+      <Mini label='Net Expert' value={`${ct.price.toLocaleString('fr-FR')} €`}/>
       <Mini label='Statut ledger' value='Payable → Paid'/>
     </div>
     <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
       <button onClick={downloadReceipt} style={{...button(colors.core),border:'none',cursor:'pointer'}}>Télécharger la facture</button>
-      <a style={button(colors.talent)} href='/talent/sarah-benali'>Dashboard Talent</a>
-      <a style={button(colors.intermediaire)} href='/intermediaires'>Dashboard Intermédiaire</a>
+      <a style={button(colors.talent)} href='/expert/sarah-benali'>Dashboard Expert</a>
+      <a style={button(colors.intermediaire)} href='/facilitateurs'>Dashboard Facilitateur</a>
       <button onClick={reset} style={{...button('rgba(255,255,255,.25)'),background:'rgba(255,255,255,.04)',boxShadow:'none',border:'1px solid rgba(255,255,255,.25)',cursor:'pointer'}}>↺ Refaire la démo</button>
     </div>
   </section>;
