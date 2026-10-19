@@ -63,7 +63,7 @@ export default function Dashboard() {
           <div style={{ display: 'grid', gap: 10, marginTop: 14 }}>{notifs.map((n) => <Link key={n.id} href={n.link || '/espace'} style={{ textDecoration: 'none', color: '#fff', padding: 12, borderRadius: 14, background: n.read_at ? 'transparent' : 'rgba(0,213,255,.08)', border: '1px solid rgba(255,255,255,.08)' }}>
             <b>{n.title}</b><div style={{ color: '#94a3b8', fontSize: 13 }}>{n.body}</div><div style={{ color: '#64748b', fontSize: 11 }}>{fmtDateTime(n.created_at)}</div></Link>)}</div>}
       </div>
-      <div style={{ ...card('#B26BFF') }}><h2 style={{ marginTop: 0 }}>Fais grandir TSAAK</h2><p style={{ color: '#C9D4E4' }}>Invite des experts, intermédiaires, médias ou organisations : chacun reçoit un lien personnel pour créer son profil.</p><Btn href="/espace/inviter" tone="#B26BFF">Inviter quelqu'un</Btn></div>
+      <div style={{ ...card('#B26BFF') }}><h2 style={{ marginTop: 0 }}>Fais grandir TSAAK</h2><p style={{ color: '#C9D4E4' }}>Invite des experts, facilitateurs, médias ou organisations : chacun reçoit un lien personnel pour créer son profil.</p><Btn href="/espace/inviter" tone="#B26BFF">Inviter quelqu'un</Btn></div>
     </div>;
   }}</Shell>;
 }

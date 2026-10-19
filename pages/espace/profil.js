@@ -161,7 +161,7 @@ function Publication({ auth }) {
     setBusy(false); if (error) setMsg({ kind: 'error', text: error.message }); else auth.setProfile({ published: !p.published });
   }
   return <Section n="4 · Visibilité" title={p.published ? 'Ton profil est publié' : 'Ton profil est privé'} c={p.published ? C.ok : C.warn}
-    hint={p.caste === 'expert' ? 'Publié = visible dans la recherche des membres connectés (médias, organisations, intermédiaires). Tu peux le retirer à tout moment.' : 'Publié = les autres membres peuvent te trouver et t\'écrire' + (p.caste === 'intermediaire' ? ' (nécessaire pour recevoir des Wanted).' : '.')}>
+    hint={p.caste === 'expert' ? 'Publié = visible dans la recherche des membres connectés (médias, organisations, facilitateurs). Tu peux le retirer à tout moment.' : 'Publié = les autres membres peuvent te trouver et t\'écrire' + (p.caste === 'intermediaire' ? ' (nécessaire pour recevoir des Wanted).' : '.')}>
     {msg && <Notice kind={msg.kind}>{msg.text}</Notice>}
     <div><Btn onClick={toggle} disabled={busy} tone={p.published ? C.warn : C.ok}>{p.published ? 'Retirer mon profil de la recherche' : 'Publier mon profil'}</Btn></div>
   </Section>;
