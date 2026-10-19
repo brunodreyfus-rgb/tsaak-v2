@@ -24,6 +24,10 @@ export default function Score(){
     <h1 style={{fontSize:52,maxWidth:920}}>Comment TSAAK calcule le score d'un Expert</h1>
     <p style={{color:'#C9D4E4',fontSize:19,maxWidth:900}}>Le score ne mesure pas seulement la notoriété : il mesure la capacité réelle à matcher, performer et créer de la valeur dans l'écosystème. Recalculé automatiquement et quotidiennement.</p>
 
+    <section style={{...card(colors.core),marginBottom:18,padding:16}}>
+      <b style={{color:colors.core}}>Vue interne.</b> <span style={{color:'#C9D4E4'}}>Le chiffre alimente l'algorithme de recherche et le pricing. Côté Expert, médias et organisations, la fiche affiche des jauges par critère, des compétences et un nuage de mots, jamais la note brute.</span>
+    </section>
+
     <Stepper c={colors.talent} active={stage} steps={STEPS} onStepClick={setStage} maxReached={STEPS.length-1}/>
 
     <section style={{...card(colors.organisation),marginBottom:20,display:'grid',gridTemplateColumns:'auto 1fr',gap:18,alignItems:'start'}}>

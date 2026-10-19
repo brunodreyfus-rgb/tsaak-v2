@@ -232,7 +232,7 @@ export const DISCOVERY_CASES = [
     { label:'Envoyer un message groupé', href:'/messaging' },
   ]},
   { key:'patchwork', label:'Patchwork', c:colors.intermediaire, steps:[
-    { label:'Découvrir les recommandations Push', href:'/patchwork' },
+    { label:'Découvrir les suggestions sur demande', href:'/patchwork' },
   ]},
   { key:'wanted', label:'Wanted → Propositions', c:colors.media, steps:[
     { label:'Publier un Wanted', href:'/wanted' },
@@ -325,5 +325,96 @@ export function DiscoveryPanel(){
         {stepIdx === current.steps.length-1 && <span style={{flex:1,textAlign:'center',fontSize:11,color:'#7A8699',padding:'9px 0'}}>Parcours terminé ✓</span>}
       </div>
     </div>}
+  </div>;
+}
+
+// ---- Fiche Expert : compétences, jauges, nuage de mots, disponibilité (retours rdv Yves, 16/10) ----
+// Le chiffre du score reste un indicateur INTERNE (algorithme de recherche, pricing).
+// Côté Expert et côté recherche on affiche des jauges par critère, un rang, des compétences et un nuage de mots.
+export const GAUGE_CRITERIA = [
+  { k:'desirability', name:'Désirabilité', icon:'🎯', c:'#7CFFB2', hint:'Demandes entrantes, rareté du sujet' },
+  { k:'media', name:'Passages média', icon:'🎬', c:'#00D5FF', hint:'TV, podcasts, presse, conférences' },
+  { k:'performance', name:'Performance', icon:'⚡', c:'#FFB020', hint:'Fiabilité, réactivité, retours clients' },
+  { k:'community', name:'Communauté', icon:'👥', c:'#B26BFF', hint:'Recommandations et engagement' },
+];
+const GENERIC_TAGS = ['TV ready','Keynote ready','Verified','High demand','Expert TSAAK'];
+
+export function hashStr(s){ let h=2166136261; for(let i=0;i<String(s).length;i++){ h^=String(s).charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+const clamp=(v,a=4,b=100)=>Math.max(a,Math.min(b,Math.round(v)));
+
+export function gaugesFor(t){
+  if(t && t.criteria) return t.criteria;
+  const s = (t && t.score) || 60, h = hashStr((t&&t.id)||(t&&t.name)||'x');
+  return {
+    desirability: clamp(s + (h%13) - 8),
+    media: clamp(s + ((h>>3)%13) - 6),
+    performance: clamp(s + ((h>>6)%13) - 8),
+    community: clamp(s + ((h>>9)%17) - 14),
+  };
+}
+export function tierFor(score=0){
+  if(score>=90) return { name:'Élite', c:'#F6FF00' };
+  if(score>=75) return { name:'Confirmé', c:'#7CFFB2' };
+  if(score>=50) return { name:'Montant', c:'#00D5FF' };
+  return { name:'Émergent', c:'#FF9B3D' };
+}
+export function skillsFor(t){
+  if(t && Array.isArray(t.skills) && t.skills.length) return t.skills;
+  const out=[]; const add=x=>{ if(x && !out.includes(x)) out.push(x); };
+  ((t&&(t.topics||t.tags))||[]).filter(x=>!GENERIC_TAGS.includes(x)).forEach(add);
+  add(t && t.role);
+  return out;
+}
+export function keywordsFor(t){
+  const base=[...skillsFor(t), ...(((t&&t.tags)||[]).filter(x=>!GENERIC_TAGS.includes(x))), ...((t&&t.keywords)||[]), ...((t&&t.languages)||[]).map(l=>({FR:'Français',EN:'Anglais',AR:'Arabe',HE:'Hébreu'}[l]||l))];
+  const seen=[]; base.forEach(x=>{ if(x && !seen.includes(x)) seen.push(x); });
+  return seen.slice(0,14).map((w,i)=>({ w, size: 14 + ((hashStr(w+((t&&t.id)||''))%5))*5 + (i<3?6:0) }));
+}
+
+// Disponibilité : 'dispo' | 'indispo' | 'verifier'. Un expert sans calendrier renseigné reste affiché avec « Vérifier la dispo ».
+export function availabilityFor(t, iso){
+  const h = hashStr((t&&t.id)||(t&&t.name)||'x');
+  const hasCalendar = (h%3)!==0;
+  if(!hasCalendar) return 'verifier';
+  if(!iso) return 'verifier';
+  const day = Math.floor(new Date(iso+'T00:00:00Z').getTime()/86400000);
+  return ((h+day)%4)===0 ? 'indispo' : 'dispo';
+}
+export function AvailabilityBadge({status}){
+  const map={ dispo:['Disponible','#7CFFB2'], indispo:['Indisponible','#FF8A8A'], verifier:['Vérifier la dispo','#FFB020'] };
+  const [label,c]=map[status]||map.verifier;
+  return <span style={{display:'inline-flex',alignItems:'center',gap:6,fontSize:11,fontWeight:800,padding:'5px 10px',borderRadius:999,color:c,border:`1px solid ${c}66`,background:`${c}14`}}><span style={{width:7,height:7,borderRadius:'50%',background:c,boxShadow:`0 0 8px ${c}`}}/>{label}</span>;
+}
+
+export function SkillChips({skills, c=colors.talent, big=false, max}){
+  const list = max ? skills.slice(0,max) : skills;
+  return <div style={{display:'flex',gap:big?10:6,flexWrap:'wrap'}}>
+    {list.map(s=><span key={s} style={{fontSize:big?15:11,fontWeight:800,padding:big?'10px 16px':'5px 9px',borderRadius:999,color:'#fff',border:`1px solid ${c}88`,background:`linear-gradient(135deg,${c}2a,#ffffff0a)`,boxShadow:big?`0 0 18px ${c}22`:'none'}}>{big?'✔ ':''}{s}</span>)}
+  </div>;
+}
+
+// Jauges façon jeu vidéo : 10 segments lumineux par critère, niveau 1 à 10.
+export function GameGauges({values, compact=false}){
+  return <div style={{display:'grid',gap:compact?7:14}}>
+    {GAUGE_CRITERIA.map(g=>{
+      const v = values[g.k] ?? 0, lvl = Math.max(1,Math.round(v/10));
+      return <div key={g.k}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',fontSize:compact?10:13,marginBottom:compact?3:6}}>
+          <span style={{color:g.c,fontWeight:900,letterSpacing:.5}}>{g.icon} {g.name}</span>
+          <b style={{color:'#C9D4E4'}}>Niv. {lvl}</b>
+        </div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(10,1fr)',gap:compact?2:4}}>
+          {Array.from({length:10}).map((_,i)=><span key={i} style={{height:compact?6:12,borderRadius:3,background:i<lvl?g.c:'rgba(255,255,255,.08)',boxShadow:i<lvl?`0 0 ${compact?6:12}px ${g.c}99`:'none',opacity:i<lvl?1:.9}}/>)}
+        </div>
+        {!compact && <div style={{fontSize:11,color:'#8CA0B8',marginTop:5}}>{g.hint}</div>}
+      </div>;
+    })}
+  </div>;
+}
+
+export function WordCloud({words}){
+  const palette=['#7CFFB2','#00D5FF','#FFB020','#FF4FD8','#B26BFF','#F6FF00'];
+  return <div style={{display:'flex',flexWrap:'wrap',gap:'6px 16px',alignItems:'baseline',justifyContent:'center',padding:'6px 4px'}}>
+    {words.map((k,i)=><span key={k.w} style={{fontSize:k.size,fontWeight:800,color:palette[i%palette.length],textShadow:`0 0 14px ${palette[i%palette.length]}55`,lineHeight:1.15}}>{k.w}</span>)}
   </div>;
 }

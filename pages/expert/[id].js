@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { page, card, button, colors, Badge, Masthead, Progress, ProofCard } from '../../components/RichDemoUI';
+import { page, card, button, colors, Badge, Masthead, Progress, ProofCard, GameGauges, WordCloud, SkillChips, AvailabilityBadge, gaugesFor, tierFor, skillsFor, keywordsFor, availabilityFor } from '../../components/RichDemoUI';
 import { talents, realTalents } from '../../data/talents';
 import { mediaProofs } from '../../data/mediaProofs';
 
@@ -26,6 +26,10 @@ export default function ExpertProfile(){
   const t = all.find(x=>x.id===query.id) || all[0] || {name:'Sarah Benali',role:'Geopolitics Analyst',country:'France / UAE',score:94,avatar:'/avatars/sarah-benali.png',languages:['FR','EN','AR'],topics:['Geopolitics','AI governance','Middle East']};
   const c=colors.talent;
   const proofs = realProofsFor(t) || mediaProofs;
+  const tier = tierFor(t.score);
+  const gauges = gaugesFor(t);
+  const skills = skillsFor(t);
+  const words = keywordsFor(t);
   const isReal = Array.isArray(realTalents) && realTalents.some(x=>x.id===t.id);
   return <main style={page('talent')}><Masthead/>
     <section style={{display:'grid',gridTemplateColumns:'280px 1fr',gap:26,alignItems:'stretch'}}>
@@ -35,17 +39,35 @@ export default function ExpertProfile(){
           <Badge c={c}>{isReal ? 'EXPERT PROFILE · EXEMPLE RÉEL' : 'EXPERT PROFILE'}</Badge>
           <h1>{t.name}</h1>
           <p style={{color:'#C9D4E4'}}>{t.role} · {t.country}</p>
-          <Progress label='TSAAK Score' value={(t.score || 92)+'%'} c={c}/>
+          <div style={{display:'flex',gap:8,alignItems:'center',flexWrap:'wrap',margin:'12px 0 14px'}}>
+            <Badge c={tier.c}>Rang {tier.name}</Badge>
+            <AvailabilityBadge status={availabilityFor(t)}/>
+          </div>
           <a href='/messaging' style={button(c)}>Contacter / multi-message</a>
         </div>
       </div>
       <div style={{display:'grid',gap:18}}>
         <section style={card(c)}>
-          <h2>LinkedIn imported background</h2>
-          <p style={{color:'#C9D4E4'}}>Current position, education, topics, languages and public expertise are imported from LinkedIn-like data, then enriched by AI scan.</p>
+          <h2 style={{marginTop:0}}>Compétences clés</h2>
+          <SkillChips skills={skills} c={c} big/>
+          <p style={{color:'#8CA0B8',fontSize:12,margin:'14px 0 0'}}>Ce que l'expert sait faire, en clair : c'est la première chose que voit un média ou une organisation.</p>
+        </section>
+        <section style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:18}}>
+          <div style={card(colors.core)}>
+            <h2 style={{marginTop:0}}>Jauges TSAAK</h2>
+            <GameGauges values={gauges}/>
+            <p style={{color:'#8CA0B8',fontSize:11,margin:'14px 0 0'}}>Chaque jauge se recalcule à chaque nouvelle preuve. {isReal ? 'Jauges illustratives dans cette démo.' : ''}</p>
+          </div>
+          <div style={card(colors.media)}>
+            <h2 style={{marginTop:0}}>Nuage de mots</h2>
+            <WordCloud words={words}/>
+          </div>
+        </section>
+        <section style={card(c)}>
+          <h2 style={{marginTop:0}}>Parcours importé</h2>
+          <p style={{color:'#C9D4E4'}}>Poste actuel, formation, thèmes et langues sont importés (LinkedIn dans la démo), puis enrichis par scan IA, et toujours validés par l'expert.</p>
           <div style={{display:'flex',gap:10,flexWrap:'wrap'}}>
             {(t.languages || ['FR','EN']).map(x=><Badge key={x} c={c}>{x}</Badge>)}
-            {(t.topics || t.tags || ['AI','Media','Policy']).map(x=><Badge key={x} c={colors.media}>{x}</Badge>)}
           </div>
         </section>
         <section style={card(colors.media)}>

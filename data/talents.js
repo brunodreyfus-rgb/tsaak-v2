@@ -42,6 +42,7 @@ export const realTalents = [
   {
     id:'jeremie-mani', name:'Jérémie Mani', role:'CEO Webhelp Canada', country:'Canada',
     photo:'/avatars/jeremie-mani.png', score:85, price:'Sur devis',
+    skills:['Outsourcing','Entrepreneuriat à impact'], keywords:['Webhelp','Canada','Podcasthon'],
     languages:['FR','EN'], tags:['Outsourcing','Entrepreneuriat à impact','Expert TSAAK'],
     linkedin:{headline:'CEO Webhelp Canada · co-fondateur Podcasthon.org', followers:'—', company:'Webhelp Canada'},
     media:[
@@ -56,6 +57,7 @@ export const realTalents = [
   {
     id:'entrepreneur-btp', name:'Entrepreneur BTP & Venture Studio', role:'Fondateur & CEO (profil anonymisé)', country:'France',
     photo:'/avatars/profile-anonymized.png', score:70, price:'Sur devis',
+    skills:['Venture Studio','IA pour le BTP','Levée de fonds','Entrepreneuriat'], keywords:['BTP','Startups'],
     languages:['FR','EN'], tags:['Venture Studio','IA pour le BTP','Expert TSAAK'],
     linkedin:{headline:'Fondateur & CEO (profil anonymisé)', followers:'—', company:'—'},
     media:[
@@ -68,6 +70,7 @@ export const realTalents = [
   {
     id:'bruno-dreyfus', name:'Bruno Dreyfus', role:'Co-CEO, TSAAK', country:'—',
     photo:'/avatars/bruno-dreyfus.png', score:28, price:'—',
+    skills:['Relation client','E-commerce','Conseil','Innovation data','Bijouterie'], keywords:['Tenengroup'],
     languages:['FR','EN'], tags:['Bijouterie','Innovation data','Expert TSAAK'],
     linkedin:{headline:'Tenengroup', followers:'—', company:'Tenengroup'},
     media:[],
@@ -77,6 +80,7 @@ export const realTalents = [
   {
     id:'jonathan-allouche', name:'Jonathan Allouche', role:'Co-CEO, TSAAK', country:'Israël / France',
     photo:'/avatars/jonathan-allouche.png', score:68, price:'Sur devis',
+    skills:['Stand-up & humour','Production TV','Scénario','Programmation','Journalisme','Metaverse'], keywords:['i24NEWS','Comedy Club Academy'],
     languages:['FR','EN','HE'], tags:['Stand-up & production', 'Metaverse', 'Expert TSAAK'],
     linkedin:{headline:'CEO Writing Metavers · Fondateur, Comedy Club Academy', followers:'—', company:'Writing Metavers'},
     media:[

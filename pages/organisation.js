@@ -25,6 +25,11 @@ export default function Organisation(){
       ]} cta={{ href:'/search', label:'Chercher des speakers' }}/>
     </div>
 
+    <section style={{...card(colors.core),marginBottom:22,padding:18}}>
+      <Badge c={colors.core}>NOTIFICATIONS</Badge>
+      <p style={{color:'#C9D4E4',margin:'10px 0 0',fontSize:14}}>Pas de relance par email, SMS ou WhatsApp : vos propositions et réponses vous attendent dans l'application, que vous ouvrez quand vous en avez besoin. Aucune suggestion Push n'est envoyée sans que vous l'ayez demandée.</p>
+    </section>
+
     <h2>Business cases à tester depuis cette caste</h2>
     <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(210px,1fr))',gap:14,marginBottom:26}}>
       <Case c={c} href='/search' title='Recherche proactive' text='Composez un panel selon vos critères.'/>
