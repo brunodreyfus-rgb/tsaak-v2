@@ -506,6 +506,18 @@ begin
 end $$;
 grant execute on function public.search_experts(text,text[],date,boolean) to authenticated;
 
+
+-- Diagnostic d'installation (page /diagnostic) : ne renvoie que des booléens, jamais de données
+create or replace function public.setup_status() returns json language sql stable security definer set search_path = public as $$
+  select json_build_object(
+    'has_profiles', exists(select 1 from public.profiles),
+    'has_admin', exists(select 1 from public.profiles where is_admin),
+    'invite_only', coalesce((select value from public.app_settings where key = 'invite_only'), 'true') = 'true',
+    'trigger_ok', exists(select 1 from pg_trigger where tgname = 'on_auth_user_created' and not tgisinternal)
+  )
+$$;
+grant execute on function public.setup_status() to anon, authenticated;
+
 -- ---------------------------------------------------------------------
 -- 10. RLS + droits par colonne
 -- ---------------------------------------------------------------------
