@@ -18,7 +18,7 @@ export function NotConfigured() {
   return <main style={pageBox()}><div style={{ ...card(colors.organisation), maxWidth: 640, margin: '12vh auto' }}>
     <h1 style={{ marginTop: 0 }}>Site à configurer</h1>
     <p style={{ color: '#C9D4E4' }}>Les clés Supabase ne sont pas encore renseignées. Suis les étapes de <b>SETUP.md</b> (10 minutes) : créer le projet Supabase, coller <code>supabase/schema.sql</code>, puis renseigner <code>NEXT_PUBLIC_SUPABASE_URL</code> et <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>.</p>
-    <Link href="/" style={{ color: colors.media }}>← Retour à la démo</Link>
+    <p><Link href="/diagnostic" style={{ color: colors.organisation, fontWeight: 800 }}>Lancer le diagnostic d'installation</Link></p><Link href="/" style={{ color: colors.media }}>← Retour à la démo</Link>
   </div></main>;
 }
 
