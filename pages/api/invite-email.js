@@ -1,7 +1,7 @@
 import { requireUser, rateLimit } from '../../lib/apiAuth';
 
 const esc = (s) => String(s || '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const CASTE_FR = { expert: 'expert', intermediaire: 'intermédiaire', media: 'média', organisation: 'organisation' };
+const CASTE_FR = { expert: 'expert', intermediaire: 'facilitateur', media: 'média', organisation: 'organisation' };
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST uniquement' });
