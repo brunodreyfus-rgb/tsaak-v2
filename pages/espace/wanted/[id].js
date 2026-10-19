@@ -74,7 +74,7 @@ export default function WantedPage() {
         </div>}
       </div>}
 
-      {w.is_author && <div style={card()}><h2 style={{ marginTop: 0 }}>Intermédiaires ({recips.length})</h2>
+      {w.is_author && <div style={card()}><h2 style={{ marginTop: 0 }}>Facilitateurs ({recips.length})</h2>
         <div style={{ display: 'grid', gap: 10 }}>{recips.map((r) => { const [l, c] = ST[r.status]; return <div key={r.recipient_id} style={{ display: 'flex', gap: 12, alignItems: 'center', padding: 12, borderRadius: 14, border: '1px solid rgba(255,255,255,.1)', flexWrap: 'wrap' }}>
           <Avatar src={names[r.recipient_id] && names[r.recipient_id].photo_url} name={nm(r.recipient_id)} size={38} /><div style={{ flex: 1 }}><b>{nm(r.recipient_id)}</b>{r.response && <div style={{ color: '#C9D4E4', fontSize: 13 }}>« {r.response} »</div>}</div>
           <span style={{ color: c, fontWeight: 800, fontSize: 12, border: `1px solid ${c}66`, padding: '5px 10px', borderRadius: 999 }}>{l}</span></div>; })}</div></div>}
